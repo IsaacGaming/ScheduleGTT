@@ -117,7 +117,7 @@
                             </StackPanel>
 
                             <DataGrid Name="dgSpecialities"
-                                      Grid.Row="1"
+                                      Grid.Row="1"       
                                       ItemsSource="{Binding Path=GetSpecialities}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
@@ -147,9 +147,15 @@
                                 <TextBlock Text="Название"/>
                                 <TextBox Name="GroupNameTB"/>
                                 <TextBlock Text="Специальность"/>
-                                <ComboBox Name="SpecialisationCB"/>
+                                <ComboBox Name="SpecialisationCB"
+                                          ItemsSource="{Binding Path=GetSpecialities}"
+                                          SelectedIndex="0"
+                                          DisplayMemberPath="Name"/>
                                 <TextBlock Text="Тип группы"/>
-                                <ComboBox Name="TypeGroupCB"/>
+                                <ComboBox Name="TypeGroupCB"
+                                          ItemsSource="{Binding Path=GetGroupTypes}"
+                                          SelectedIndex="0"
+                                          DisplayMemberPath="Name"/>
                             </StackPanel>
 
                             <DataGrid Name="dgGroups"
@@ -319,27 +325,33 @@
                                     <TextBlock Text="Дисциплина"/>
                                     <ComboBox Name="cbDisciplines"
                                               ItemsSource="{Binding Path=GetDisciplines}"
+                                              SelectedIndex="0"
                                               DisplayMemberPath="Name"/>
                                     <TextBlock Text="Преподаватель"/>
                                     <ComboBox Name="cbTeachers"
                                               ItemsSource="{Binding Path=GetTeachers}"
+                                              SelectedIndex="0"
                                               DisplayMemberPath="FullName"/>
                                     <TextBlock Text="Дата дня"/>
                                     <DatePickerTextBox Name="tbDate"/>
                                     <TextBlock Text="Группа"/>
                                     <ComboBox Name="cbGroups"
                                               ItemsSource="{Binding Path=GetGroups}"
+                                              SelectedIndex="0"
                                               DisplayMemberPath="Name"/>
                                     <TextBlock Text="Название звонка"/>
                                     <ComboBox Name="cbNameBell"
                                               ItemsSource="{Binding Path=GetScheduleBells}"
+                                              SelectedIndex="0"
                                               DisplayMemberPath="Name"/>
                                     <TextBlock Text="Помещение"/>
                                     <ComboBox Name="cbRooms"
+                                              SelectedIndex="0"
                                               ItemsSource="{Binding Path=GetRooms}"
                                               DisplayMemberPath="NumberRoom"/>
                                     <TextBlock Text="Тип занятия"/>
                                     <ComboBox Name="cbTypeLessons"
+                                              SelectedIndex="0"
                                               ItemsSource="{Binding Path=GetLessonTypes}"
                                               DisplayMemberPath="Name"/>
                                 </StackPanel>
@@ -348,7 +360,7 @@
                             <DataGrid Name="dgScheduleLessons"
                                       SelectionMode="Extended"
                                       Grid.Row="1"
-                                      ItemsSource="{Binding GetScheduleLessons}">
+                                      ItemsSource="{Binding Path=GetScheduleLessons}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
                                                         Binding="{Binding Path=Id}"/>

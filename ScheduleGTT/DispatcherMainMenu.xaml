@@ -1,0 +1,69 @@
+﻿<Window x:Class="ScheduleGTT.DispatcherMainMenu"
+        Name="DispatcherMainMenuWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ScheduleGTT"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Closing="DispatcherMainMenuWnd_Closing">
+
+    <Window.Resources>
+        <Style TargetType="local:DispatcherMainMenu">
+            <Setter Property="Title" Value="Главное меню"/>
+            <Setter Property="Height" Value="600"/>
+            <Setter Property="Width" Value="1000"/>
+            <Setter Property="MinWidth" Value="700"/>
+            <Setter Property="MinHeight" Value="600"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.4*"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer>
+            <StackPanel>
+                <TextBlock Text="Дисциплина"/>
+                <ComboBox/>
+                <TextBlock Text="Преподаватель"/>
+                <ComboBox/>
+                <TextBlock Text="Дата дня"/>
+                <TextBox/>
+                <TextBlock Text="Группа"/>
+                <ComboBox/>
+                <TextBlock Text="Название звонка"/>
+                <ComboBox/>
+                <TextBlock Text="Помещение"/>
+                <ComboBox/>
+                <TextBlock Text="Тип занятия"/>
+                <ComboBox/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <DataGrid Name="dgScheduleLessons"
+                  Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ид"/>
+                <DataGridTextColumn Header="Дисциплина"/>
+                <DataGridTextColumn Header="Преподаватель"/>
+                <DataGridTextColumn Header="Дата дня"/>
+                <DataGridTextColumn Header="Группа"/>
+                <DataGridTextColumn Header="Название звонка"/>
+                <DataGridTextColumn Header="Помещение"/>
+                <DataGridTextColumn Header="Тип занятия"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Menu Grid.Row="3">
+            <MenuItem Header="Добавить"/>
+            <MenuItem Header="Удалить"/>
+            <MenuItem Header="Изменить"/>
+            <MenuItem Header="Создать отчет"/>
+        </Menu>
+    </Grid>
+</Window>

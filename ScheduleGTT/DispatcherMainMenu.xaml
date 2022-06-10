@@ -5,17 +5,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScheduleGTT"
+        xmlns:database="clr-namespace:ScheduleGTT.DataBase"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Closing="DispatcherMainMenuWnd_Closing">
 
+    <Window.DataContext>
+        <database:ScheduleGTT_Context/>
+    </Window.DataContext>
+
     <Window.Resources>
         <Style TargetType="local:DispatcherMainMenu">
             <Setter Property="Title" Value="Главное меню"/>
-            <Setter Property="Height" Value="600"/>
-            <Setter Property="Width" Value="1000"/>
-            <Setter Property="MinWidth" Value="700"/>
-            <Setter Property="MinHeight" Value="600"/>
+            <Setter Property="Height" Value="700"/>
+            <Setter Property="Width" Value="1200"/>
+            <Setter Property="MinWidth" Value="1200"/>
+            <Setter Property="MinHeight" Value="700"/>
         </Style>
     </Window.Resources>
 
@@ -23,39 +28,73 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.4*"/>
             <RowDefinition/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
-        <ScrollViewer>
-            <StackPanel>
-                <TextBlock Text="Дисциплина"/>
-                <ComboBox/>
-                <TextBlock Text="Преподаватель"/>
-                <ComboBox/>
-                <TextBlock Text="Дата дня"/>
-                <TextBox/>
-                <TextBlock Text="Группа"/>
-                <ComboBox/>
-                <TextBlock Text="Название звонка"/>
-                <ComboBox/>
-                <TextBlock Text="Помещение"/>
-                <ComboBox/>
-                <TextBlock Text="Тип занятия"/>
-                <ComboBox/>
-            </StackPanel>
-        </ScrollViewer>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0"
+                    Grid.RowSpan="2">
+            <TextBlock Text="Дисциплина"/>
+            <ComboBox Name="cbDisciplines"
+                      ItemsSource="{Binding Path=GetDisciplines}"
+                      SelectedIndex="0"
+                      DisplayMemberPath="Name"/>
+            <TextBlock Text="Преподаватель"/>
+            <ComboBox Name="cbTeachers"
+                      ItemsSource="{Binding Path=GetTeachers}"
+                      SelectedIndex="0"
+                      DisplayMemberPath="FullName"/>
+            <TextBlock Text="Дата дня"/>
+            <DatePickerTextBox Name="tbDate"/>
+            <TextBlock Text="Группа"/>
+            <ComboBox Name="cbGroups"
+                      ItemsSource="{Binding Path=GetGroups}"
+                      SelectedIndex="0"
+                      DisplayMemberPath="Name"/>
+            <TextBlock Text="Название звонка"/>
+            <ComboBox Name="cbNameBell"
+                      ItemsSource="{Binding Path=GetScheduleBells}"
+                      SelectedIndex="0"
+                      DisplayMemberPath="Name"/>
+            <TextBlock Text="Помещение"/>
+            <ComboBox Name="cbRooms"
+                      SelectedIndex="0"
+                      ItemsSource="{Binding Path=GetRooms}"
+                      DisplayMemberPath="NumberRoom"/>
+            <TextBlock Text="Тип занятия"/>
+            <ComboBox Name="cbTypeLessons"
+                      SelectedIndex="0"
+                      ItemsSource="{Binding Path=GetLessonTypes}"
+                      DisplayMemberPath="Name"/>
+        </StackPanel>
 
         <DataGrid Name="dgScheduleLessons"
-                  Grid.Row="1">
+                  SelectionMode="Extended"
+                  Grid.Row="0"
+                  Grid.Column="1"
+                  Grid.RowSpan="3"
+                  ItemsSource="{Binding Path=GetScheduleLessons}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ид"/>
-                <DataGridTextColumn Header="Дисциплина"/>
-                <DataGridTextColumn Header="Преподаватель"/>
-                <DataGridTextColumn Header="Дата дня"/>
-                <DataGridTextColumn Header="Группа"/>
-                <DataGridTextColumn Header="Название звонка"/>
-                <DataGridTextColumn Header="Помещение"/>
-                <DataGridTextColumn Header="Тип занятия"/>
+                <DataGridTextColumn Header="Ид"
+                                    Binding="{Binding Path=Id}"/>
+                <DataGridTextColumn Header="Дисциплина"
+                                    Binding="{Binding Path=Disciplines.Name}"/>
+                <DataGridTextColumn Header="Преподаватель"
+                                    Binding="{Binding Path=Teachers.FullName}"/>
+                <DataGridTextColumn Header="Дата дня"
+                                    Binding="{Binding Path=DateLesson, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                <DataGridTextColumn Header="Группа"
+                                    Binding="{Binding Path=Groups.Name}"/>
+                <DataGridTextColumn Header="Название звонка"
+                                    Binding="{Binding Path=ScheduleBell1.Name}"/>
+                <DataGridTextColumn Header="Помещение"
+                                    Binding="{Binding Path=Rooms.NumberRoom}"/>
+                <DataGridTextColumn Header="Тип занятия"
+                                    Binding="{Binding Path=LessonTypes.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
 

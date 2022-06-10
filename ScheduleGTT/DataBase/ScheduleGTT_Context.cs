@@ -9,7 +9,7 @@ namespace ScheduleGTT.DataBase
     public partial class ScheduleGTT_Context : DbContext
     {
         public ScheduleGTT_Context()
-            : base("name=ScheduleGTT_Context")
+            : base("name=ScheduleGTT_Context_College")
         {
         }
 
@@ -27,27 +27,27 @@ namespace ScheduleGTT.DataBase
         }
 
         #region Lists
-        public virtual List<GroupTypes> GetGroupTypes => Context.GroupTypes.ToList();
+        public static List<GroupTypes> GetGroupTypes => Context.GroupTypes.ToList();
 
-        public virtual List<LessonTypes> GetLessonTypes => Context.LessonTypes.ToList();
+        public static List<LessonTypes> GetLessonTypes => Context.LessonTypes.ToList();
 
-        public virtual List<Specialities> GetSpecialities => Context.Specialities.ToList();
+        public static List<Specialities> GetSpecialities => Context.Specialities.ToList();
 
-        public virtual List<Groups> GetGroups => Context.Groups.Include(s => s.Specialities).Include(g => g.GroupTypes).ToList();
+        public static List<Groups> GetGroups => Context.Groups.Include(s => s.Specialities).Include(g => g.GroupTypes).ToList();
 
-        public virtual List<Rooms> GetRooms => Context.Rooms.ToList();
+        public static List<Rooms> GetRooms => Context.Rooms.ToList();
 
-        public virtual List<Disciplines> GetDisciplines => Context.Disciplines.ToList();
+        public static List<Disciplines> GetDisciplines => Context.Disciplines.ToList();
 
-        public virtual List<Teachers> GetTeachers => Context.Teachers.ToList();
+        public static List<Teachers> GetTeachers => Context.Teachers.ToList();
 
-        public virtual List<ScheduleLessons> GetScheduleLessons
+        public static List<ScheduleLessons> GetScheduleLessons
         {
             get
             {
                 return Context.ScheduleLessons
                     .Include(t => t.Teachers)
-                    .Include(g => Groups)
+                    .Include(g => g.Groups)
                     .Include(les => les.LessonTypes)
                     .Include(r => r.Rooms)
                     .Include(d => d.Disciplines)

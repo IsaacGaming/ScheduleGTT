@@ -18,8 +18,8 @@
         <Style TargetType="local:MainMenu">
             <Setter Property="Title" Value="Главное меню"/>
             <Setter Property="Height" Value="800"/>
-            <Setter Property="Width" Value="1000"/>
-            <Setter Property="MinWidth" Value="700"/>
+            <Setter Property="Width" Value="1200"/>
+            <Setter Property="MinWidth" Value="1200"/>
             <Setter Property="MinHeight" Value="800"/>
         </Style>
     </Window.Resources>
@@ -43,8 +43,8 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"/>
-                                <RowDefinition/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
 
                             <StackPanel>
@@ -52,8 +52,20 @@
                                 <TextBox Name="GroupTypeNameTB"/>
                             </StackPanel>
 
+                            <Menu Grid.Row="1">
+                                <MenuItem Header="Добавить"
+                                          Name="AddTypeGroupButton"
+                                          Click="AddTypeGroupButton_Click"/>
+                                <MenuItem Header="Удалить"
+                                          Name="DeleteTypeGroupButton"
+                                          Click="DeleteTypeGroupButton_Click"/>
+                                <MenuItem Header="Изменить"
+                                          Name="EditTypeGroupButton"
+                                          Click="EditTypeGroupButton_Click"/>
+                            </Menu>
+
                             <DataGrid Name="dgGroupType"
-                                      Grid.Row="1"
+                                      Grid.Row="2"
                                       ItemsSource="{Binding Path=GetGroupTypes}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
@@ -62,12 +74,6 @@
                                                         Binding="{Binding Path=Name}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-
-                            <Menu Grid.Row="2">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
-                            </Menu>
                         </Grid>
                     </TabItem>
 
@@ -75,17 +81,29 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"/>
-                                <RowDefinition/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
 
                             <StackPanel>
                                 <TextBlock Text="Название"/>
                                 <TextBox Name="LessonTypeNameTB"/>
                             </StackPanel>
+                            
+                            <Menu Grid.Row="1">
+                                <MenuItem Header="Добавить"
+                                          Name="AddTypeLesson"
+                                          Click="AddTypeLesson_Click"/>
+                                <MenuItem Header="Удалить"
+                                          Name="DeleteTypeLesson"
+                                          Click="DeleteTypeLesson_Click"/>
+                                <MenuItem Header="Изменить"
+                                          Name="EditTypeLesson"
+                                          Click="EditTypeLesson_Click"/>
+                            </Menu>
 
                             <DataGrid Name="dgLessonsType"
-                                      Grid.Row="1"
+                                      Grid.Row="2"
                                       ItemsSource="{Binding Path=GetLessonTypes}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
@@ -94,12 +112,6 @@
                                                         Binding="{Binding Path=Name}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-
-                            <Menu Grid.Row="2">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
-                            </Menu>
                         </Grid>
                     </TabItem>
 
@@ -107,8 +119,8 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"/>
-                                <RowDefinition/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
 
                             <StackPanel>
@@ -116,8 +128,17 @@
                                 <TextBox Name="SpecialisationNameTB"/>
                             </StackPanel>
 
+                            <Menu Grid.Row="1">
+                                <MenuItem Header="Добавить"
+                                          Name="AddSpecialities"/>
+                                <MenuItem Header="Удалить"
+                                          Name="DeleteSpecialities"/>
+                                <MenuItem Header="Изменить"
+                                          Name="EditSpecialities"/>
+                            </Menu>
+
                             <DataGrid Name="dgSpecialities"
-                                      Grid.Row="1"       
+                                      Grid.Row="2"       
                                       ItemsSource="{Binding Path=GetSpecialities}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
@@ -126,12 +147,6 @@
                                                         Binding="{Binding Path=Name}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-
-                            <Menu Grid.Row="2">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
-                            </Menu>
                         </Grid>
                     </TabItem>
 
@@ -139,10 +154,16 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="280"/>
-                                <RowDefinition/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
 
+                            <Menu Grid.Row="1">
+                                <MenuItem Header="Добавить"/>
+                                <MenuItem Header="Удалить"/>
+                                <MenuItem Header="Изменить"/>
+                            </Menu>
+                            
                             <StackPanel>
                                 <TextBlock Text="Название"/>
                                 <TextBox Name="GroupNameTB"/>
@@ -159,7 +180,7 @@
                             </StackPanel>
 
                             <DataGrid Name="dgGroups"
-                                      Grid.Row="1"
+                                      Grid.Row="2"
                                       ItemsSource="{Binding Path=GetGroups}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
@@ -172,12 +193,6 @@
                                                         Binding="{Binding Path=GroupTypes.Name}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-
-                            <Menu Grid.Row="2">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
-                            </Menu>
                         </Grid>
                     </TabItem>
 
@@ -185,8 +200,8 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="180"/>
-                                <RowDefinition/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
 
                             <StackPanel>
@@ -195,9 +210,15 @@
                                 <TextBlock Text="Название"/>
                                 <TextBox Name="AuditoryNameTB"/>
                             </StackPanel>
+                            
+                            <Menu Grid.Row="1">
+                                <MenuItem Header="Добавить"/>
+                                <MenuItem Header="Удалить"/>
+                                <MenuItem Header="Изменить"/>
+                            </Menu>
 
                             <DataGrid Name="dgRooms"
-                                      Grid.Row="1"
+                                      Grid.Row="2"
                                       ItemsSource="{Binding Path=GetRooms}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
@@ -208,12 +229,6 @@
                                                         Binding="{Binding Path=Name}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-
-                            <Menu Grid.Row="2">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
-                            </Menu>
                         </Grid>
                     </TabItem>
 
@@ -221,8 +236,8 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="180"/>
-                                <RowDefinition/>
                                 <RowDefinition Height="40"/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
 
                             <StackPanel>
@@ -232,8 +247,14 @@
                                 <TextBox Name="ShortLessonNameTB"/>
                             </StackPanel>
 
+                            <Menu Grid.Row="1">
+                                <MenuItem Header="Добавить"/>
+                                <MenuItem Header="Удалить"/>
+                                <MenuItem Header="Изменить"/>
+                            </Menu>
+
                             <DataGrid Name="dgDisciplines"
-                                      Grid.Row="1"
+                                      Grid.Row="2"
                                       ItemsSource="{Binding Path=GetDisciplines}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
@@ -244,12 +265,6 @@
                                                         Binding="{Binding Path=ShortName}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-
-                            <Menu Grid.Row="2">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
-                            </Menu>
                         </Grid>
                     </TabItem>
 
@@ -258,28 +273,32 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                <RowDefinition/>
-                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="100"/>
                             </Grid.RowDefinitions>
 
-                            <ScrollViewer>
-                                <StackPanel>
-                                    <TextBlock Text="Фамилия"/>
-                                    <TextBox Name="FirstNameTeacherTB"/>
-                                    <TextBlock Text="Имя"/>
-                                    <TextBox Name="MiddleNameTeacherTB"/>
-                                    <TextBlock Text="Отчество"/>
-                                    <TextBox Name="LastNameTeacherTB"/>
-                                    <TextBlock Text="Преподаваемые дисциплины"/>
-                                    <ComboBox Name="TeacherDisciplinesCB"/>
-                                </StackPanel>
-                            </ScrollViewer>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.6*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.RowSpan="2">
+                                <TextBlock Text="Фамилия"/>
+                                <TextBox Name="FirstNameTeacherTB"/>
+                                <TextBlock Text="Имя"/>
+                                <TextBox Name="MiddleNameTeacherTB"/>
+                                <TextBlock Text="Отчество"/>
+                                <TextBox Name="LastNameTeacherTB"/>
+                                <TextBlock Text="Преподаваемые дисциплины"/>
+                                <ComboBox Name="TeacherDisciplinesCB"/>
+                            </StackPanel>
 
                             <DataGrid Name="dgTeachers"
-                                      Grid.Row="1"
+                                      Grid.Row="0"
+                                      Grid.Column="1"
                                       ItemsSource="{Binding Path=GetTeachers}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
+                                                        Width="80"
                                                         Binding="{Binding Path=Id}"/>
                                     <DataGridTextColumn Header="ФИО"
                                                         Width="auto"
@@ -288,7 +307,9 @@
                             </DataGrid>
 
                             <DataGrid Name="dgTeachLessons"
-                                      Grid.Row="2"
+                                      Grid.Row="1"
+                                      Grid.Column="1"
+                                      Grid.RowSpan="2"
                                       ItemsSource="{Binding Path=GetTeachers}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="ФИО"
@@ -317,49 +338,55 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.4*"/>
                                 <RowDefinition/>
-                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="60"/>
                             </Grid.RowDefinitions>
 
-                            <ScrollViewer>
-                                <StackPanel>
-                                    <TextBlock Text="Дисциплина"/>
-                                    <ComboBox Name="cbDisciplines"
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0"
+                                        Grid.RowSpan="2">
+                                <TextBlock Text="Дисциплина"/>
+                                <ComboBox Name="cbDisciplines"
                                               ItemsSource="{Binding Path=GetDisciplines}"
                                               SelectedIndex="0"
                                               DisplayMemberPath="Name"/>
-                                    <TextBlock Text="Преподаватель"/>
-                                    <ComboBox Name="cbTeachers"
+                                <TextBlock Text="Преподаватель"/>
+                                <ComboBox Name="cbTeachers"
                                               ItemsSource="{Binding Path=GetTeachers}"
                                               SelectedIndex="0"
                                               DisplayMemberPath="FullName"/>
-                                    <TextBlock Text="Дата дня"/>
-                                    <DatePickerTextBox Name="tbDate"/>
-                                    <TextBlock Text="Группа"/>
-                                    <ComboBox Name="cbGroups"
+                                <TextBlock Text="Дата дня"/>
+                                <DatePickerTextBox Name="tbDate"/>
+                                <TextBlock Text="Группа"/>
+                                <ComboBox Name="cbGroups"
                                               ItemsSource="{Binding Path=GetGroups}"
                                               SelectedIndex="0"
                                               DisplayMemberPath="Name"/>
-                                    <TextBlock Text="Название звонка"/>
-                                    <ComboBox Name="cbNameBell"
+                                <TextBlock Text="Название звонка"/>
+                                <ComboBox Name="cbNameBell"
                                               ItemsSource="{Binding Path=GetScheduleBells}"
                                               SelectedIndex="0"
                                               DisplayMemberPath="Name"/>
-                                    <TextBlock Text="Помещение"/>
-                                    <ComboBox Name="cbRooms"
+                                <TextBlock Text="Помещение"/>
+                                <ComboBox Name="cbRooms"
                                               SelectedIndex="0"
                                               ItemsSource="{Binding Path=GetRooms}"
                                               DisplayMemberPath="NumberRoom"/>
-                                    <TextBlock Text="Тип занятия"/>
-                                    <ComboBox Name="cbTypeLessons"
+                                <TextBlock Text="Тип занятия"/>
+                                <ComboBox Name="cbTypeLessons"
                                               SelectedIndex="0"
                                               ItemsSource="{Binding Path=GetLessonTypes}"
                                               DisplayMemberPath="Name"/>
-                                </StackPanel>
-                            </ScrollViewer>
+                            </StackPanel>
 
                             <DataGrid Name="dgScheduleLessons"
                                       SelectionMode="Extended"
-                                      Grid.Row="1"
+                                      Grid.Row="0"
+                                      Grid.Column="1"
+                                      Grid.RowSpan="3"
                                       ItemsSource="{Binding Path=GetScheduleLessons}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
@@ -399,19 +426,24 @@
                                 <RowDefinition Height="40"/>
                             </Grid.RowDefinitions>
 
-                            <ScrollViewer>
-                                <StackPanel>
-                                    <TextBlock Text="Название урока"/>
-                                    <TextBox Name="NameLessonTB"/>
-                                    <TextBlock Text="Начало урока"/>
-                                    <TextBox Name="BeginLessonTB"/>
-                                    <TextBlock Text="Конец урока"/>
-                                    <TextBox Name="EndLessonTB"/>
-                                </StackPanel>
-                            </ScrollViewer>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.RowSpan="2">
+                                <TextBlock Text="Название урока"/>
+                                <TextBox Name="NameLessonTB"/>
+                                <TextBlock Text="Начало урока"/>
+                                <TextBox Name="BeginLessonTB"/>
+                                <TextBlock Text="Конец урока"/>
+                                <TextBox Name="EndLessonTB"/>
+                            </StackPanel>
 
                             <DataGrid Name="dgScheduleRings"
-                                      Grid.Row="1"
+                                      Grid.Row="0"
+                                      Grid.Column="1"
+                                      Grid.RowSpan="3"
                                       ItemsSource="{Binding GetScheduleBells}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"

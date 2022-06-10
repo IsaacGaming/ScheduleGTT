@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace ScheduleGTT
 {
@@ -22,6 +23,11 @@ namespace ScheduleGTT
                     e.Cancel = true;
                     break;
             }
+        }
+
+        internal static string ClearTB(this TextBox textBox)
+        {
+            return string.Empty;
         }
     }
 }

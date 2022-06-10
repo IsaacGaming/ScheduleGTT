@@ -310,7 +310,10 @@
                                 <TextBlock Text="Отчество"/>
                                 <TextBox Name="LastNameTeacherTB"/>
                                 <TextBlock Text="Преподаваемые дисциплины"/>
-                                <ComboBox Name="TeacherDisciplinesCB"/>
+                                <ComboBox Name="TeacherDisciplinesCB"
+                                          ItemsSource="{Binding Path=GetDisciplines}"
+                                          DisplayMemberPath="Name"
+                                          SelectedIndex="1"/>
                             </StackPanel>
 
                             <DataGrid Name="dgTeachers"
@@ -331,19 +334,25 @@
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       Grid.RowSpan="2"
-                                      ItemsSource="{Binding Path=GetTeachers}">
+                                      ItemsSource="{Binding Path=GetTeacherDisciplines}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="ФИО"
-                                                        Binding="{Binding Path=FullName}"/>
-                                    <DataGridTextColumn Header="Дисциплина"
                                                         Binding="{Binding Path=Teachers.FullName}"/>
+                                    <DataGridTextColumn Header="Дисциплина"
+                                                        Binding="{Binding Path=Disciplines.Name}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
                             <Menu Grid.Row="3">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
+                                <MenuItem Header="Добавить"
+                                          Name="AddTeacher"
+                                          Click="AddTeacher_Click"/>
+                                <MenuItem Header="Удалить"
+                                          Name="DeleteTeacher"
+                                          Click="DeleteTeacher_Click"/>
+                                <MenuItem Header="Изменить"
+                                          Name="EditTeacher"
+                                          Click="EditTeacher_Click"/>
                                 <MenuItem Header="Добавить ПД"/>
                                 <MenuItem Header="Удалить ПД"/>
                             </Menu>

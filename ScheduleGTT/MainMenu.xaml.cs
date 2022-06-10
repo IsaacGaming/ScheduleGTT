@@ -62,10 +62,6 @@ namespace ScheduleGTT
                     Context.SaveChanges();
                     dgGroupType.ItemsSource = GetGroupTypes;
                 }
-                else
-                {
-                    MessageBox.Show("Нужно выбрать строку");
-                }
             }
             catch (Exception ex)
             {
@@ -118,10 +114,6 @@ namespace ScheduleGTT
                     Context.LessonTypes.Remove(lessonTypes);
                     Context.SaveChanges();
                     dgLessonsType.ItemsSource = GetLessonTypes;
-                }
-                else
-                {
-                    MessageBox.Show("Нужно выбрать строку");
                 }
             }
             catch (Exception ex)
@@ -182,10 +174,6 @@ namespace ScheduleGTT
                     Context.Specialities.Remove(specialities);
                     Context.SaveChanges();
                     dgSpecialities.ItemsSource = GetSpecialities;
-                }
-                else
-                {
-                    MessageBox.Show("Нужно выбрать строку");
                 }
             }
             catch (Exception ex)
@@ -253,10 +241,6 @@ namespace ScheduleGTT
                     Context.Groups.Remove(group);
                     Context.SaveChanges();
                     dgGroups.ItemsSource = GetGroups;
-                }
-                else
-                {
-                    MessageBox.Show("Нужно выбрать строку");
                 }
             }
             catch (Exception ex)
@@ -335,10 +319,6 @@ namespace ScheduleGTT
                     Context.SaveChanges();
                     dgRooms.ItemsSource = GetRooms;
                 }
-                else
-                {
-                    MessageBox.Show("Нужно выбрать строку");
-                }
             }
             catch (Exception ex)
             {
@@ -410,10 +390,6 @@ namespace ScheduleGTT
                     Context.Disciplines.Remove(disciplines);
                     Context.SaveChanges();
                     dgDisciplines.ItemsSource = GetDisciplines;
-                }
-                else
-                {
-                    MessageBox.Show("Нужно выбрать строку");
                 }
             }
             catch (Exception ex)
@@ -489,10 +465,6 @@ namespace ScheduleGTT
                     Context.ScheduleBell.Remove(scheduleBell);
                     Context.SaveChanges();
                     dgScheduleBells.ItemsSource = GetScheduleBells;
-                }
-                else
-                {
-                    MessageBox.Show("Нужно выбрать строку");
                 }
             }
             catch (Exception ex)
@@ -664,6 +636,95 @@ namespace ScheduleGTT
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void AddTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string firstName = FirstNameTeacherTB.Text;
+                string middleName = MiddleNameTeacherTB.Text;
+                string lastName = LastNameTeacherTB.Text;
+
+                bool fnNoEmpty = string.IsNullOrEmpty(firstName);
+                bool mnNoEmpty = string.IsNullOrEmpty(middleName);
+                bool lnNoEmpty = string.IsNullOrEmpty(lastName);
+
+                if (fnNoEmpty && mnNoEmpty && lnNoEmpty)
+                {
+                    Teachers teachers = new Teachers
+                    {
+                        FirstName = firstName,
+                        MiddleName = middleName,
+                        LastName = lastName
+                    };
+
+                    FirstNameTeacherTB.ClearTB();
+                    MiddleNameTeacherTB.ClearTB();
+                    LastNameTeacherTB.ClearTB();
+
+                    Context.Teachers.Add(teachers);
+                    Context.SaveChanges();
+                    dgTeachers.ItemsSource = GetTeachers;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DeleteTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Teachers teachers = dgTeachers.SelectedItem as Teachers;
+
+                if (teachers != null)
+                {
+                    Context.Teachers.Remove(teachers);
+                    Context.SaveChanges();
+                    dgTeachers.ItemsSource = GetTeachers;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void EditTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string firstName = FirstNameTeacherTB.Text;
+                string middleName = MiddleNameTeacherTB.Text;
+                string lastName = LastNameTeacherTB.Text;
+
+                bool fnNoEmpty = string.IsNullOrEmpty(firstName);
+                bool mnNoEmpty = string.IsNullOrEmpty(middleName);
+                bool lnNoEmpty = string.IsNullOrEmpty(lastName);
+
+                Teachers teachers = dgTeachers.ItemsSource as Teachers;
+
+                if (fnNoEmpty && mnNoEmpty && lnNoEmpty && teachers != null)
+                {
+                    teachers.FirstName = firstName;
+                    teachers.MiddleName = middleName;
+                    teachers.LastName = lastName;
+
+                    FirstNameTeacherTB.ClearTB();
+                    MiddleNameTeacherTB.ClearTB();
+                    LastNameTeacherTB.ClearTB();
+
+                    Context.SaveChanges();
+                    dgTeachers.ItemsSource = GetTeachers;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

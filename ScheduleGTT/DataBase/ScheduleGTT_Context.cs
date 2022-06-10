@@ -33,7 +33,16 @@ namespace ScheduleGTT.DataBase
 
         public static List<Specialities> GetSpecialities => Context.Specialities.ToList();
 
-        public static List<Groups> GetGroups => Context.Groups.Include(s => s.Specialities).Include(g => g.GroupTypes).ToList();
+        public static List<Groups> GetGroups
+        {
+            get
+            {
+                return Context.Groups
+                    .Include(s => s.Specialities)
+                    .Include(g => g.GroupTypes)
+                    .ToList();
+            }
+        }
 
         public static List<Rooms> GetRooms => Context.Rooms.ToList();
 
@@ -60,15 +69,15 @@ namespace ScheduleGTT.DataBase
         #endregion
 
         #region DbSets
-        public virtual DbSet<Disciplines> Disciplines { get; set; }
-        public virtual DbSet<Groups> Groups { get; set; }
-        public virtual DbSet<GroupTypes> GroupTypes { get; set; }
-        public virtual DbSet<LessonTypes> LessonTypes { get; set; }
-        public virtual DbSet<Rooms> Rooms { get; set; }
-        public virtual DbSet<ScheduleBell> ScheduleBell { get; set; }
-        public virtual DbSet<ScheduleLessons> ScheduleLessons { get; set; }
-        public virtual DbSet<Specialities> Specialities { get; set; }
-        public virtual DbSet<Teachers> Teachers { get; set; }
+        public DbSet<Disciplines> Disciplines { get; set; }
+        public DbSet<Groups> Groups { get; set; }
+        public DbSet<GroupTypes> GroupTypes { get; set; }
+        public DbSet<LessonTypes> LessonTypes { get; set; }
+        public DbSet<Rooms> Rooms { get; set; }
+        public DbSet<ScheduleBell> ScheduleBell { get; set; }
+        public DbSet<ScheduleLessons> ScheduleLessons { get; set; }
+        public DbSet<Specialities> Specialities { get; set; }
+        public DbSet<Teachers> Teachers { get; set; }
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

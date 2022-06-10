@@ -215,15 +215,21 @@
 
                             <StackPanel>
                                 <TextBlock Text="Номер"/>
-                                <TextBox Name="NumberAuditoryTB"/>
+                                <TextBox Name="NumberRoomTB"/>
                                 <TextBlock Text="Название"/>
-                                <TextBox Name="AuditoryNameTB"/>
+                                <TextBox Name="RoomNameTB"/>
                             </StackPanel>
                             
                             <Menu Grid.Row="1">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
+                                <MenuItem Header="Добавить"
+                                          Name="AddRoom"
+                                          Click="AddRoom_Click"/>
+                                <MenuItem Header="Удалить"
+                                          Name="DeleteRoom"
+                                          Click="DeleteRoom_Click"/>
+                                <MenuItem Header="Изменить"
+                                          Name="EditRoom"
+                                          Click="EditRoom_Click"/>
                             </Menu>
 
                             <DataGrid Name="dgRooms"
@@ -251,15 +257,21 @@
 
                             <StackPanel>
                                 <TextBlock Text="Название"/>
-                                <TextBox Name="LessonNameTB"/>
+                                <TextBox Name="DisciplineNameTB"/>
                                 <TextBlock Text="Краткое название"/>
-                                <TextBox Name="ShortLessonNameTB"/>
+                                <TextBox Name="DisciplineShortNameTB"/>
                             </StackPanel>
 
                             <Menu Grid.Row="1">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
+                                <MenuItem Header="Добавить"
+                                          Name="AddDiscipline"
+                                          Click="AddDiscipline_Click"/>
+                                <MenuItem Header="Удалить"
+                                          Name="DeleteDiscipline"
+                                          Click="DeleteDiscipline_Click"/>
+                                <MenuItem Header="Изменить"
+                                          Name="EditDiscipline"
+                                          Click="EditDiscipline_Click"/>
                             </Menu>
 
                             <DataGrid Name="dgDisciplines"

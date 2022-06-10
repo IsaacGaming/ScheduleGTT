@@ -263,7 +263,6 @@ namespace ScheduleGTT
             {
                 MessageBox.Show(ex.ToString());
             }
-
         }
 
         private void EditGroup_Click(object sender, RoutedEventArgs e)
@@ -295,5 +294,159 @@ namespace ScheduleGTT
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void AddRoom_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bool numberRoomNoNull = !string.IsNullOrEmpty(NumberRoomTB.Text);
+                bool nameNoNull = !string.IsNullOrEmpty(RoomNameTB.Text);
+
+                if (numberRoomNoNull && nameNoNull)
+                {
+                    Rooms room = new Rooms
+                    {
+                        Name = RoomNameTB.Text,
+                        NumberRoom = NumberRoomTB.Text
+                    };
+
+                    Context.Rooms.Add(room);
+                    Context.SaveChanges();
+                    NumberRoomTB.ClearTB();
+                    RoomNameTB.ClearTB();
+                    dgRooms.ItemsSource = GetRooms;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void DeleteRoom_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Rooms room = dgRooms.SelectedItem as Rooms;
+
+                if (room != null)
+                {
+                    Context.Rooms.Remove(room);
+                    Context.SaveChanges();
+                    dgRooms.ItemsSource = GetRooms;
+                }
+                else
+                {
+                    MessageBox.Show("Нужно выбрать строку");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void EditRoom_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bool numberAuditoryNoNull = !string.IsNullOrEmpty(NumberRoomTB.Text);
+                bool nameNoNull = !string.IsNullOrEmpty(RoomNameTB.Text);
+
+                Rooms room = dgRooms.SelectedItem as Rooms;
+                if (numberAuditoryNoNull && nameNoNull && room != null)
+                {
+                    room.Name = RoomNameTB.Text;
+                    room.NumberRoom = NumberRoomTB.Text;
+                    
+                    Context.SaveChanges();
+                    NumberRoomTB.ClearTB();
+                    RoomNameTB.ClearTB();
+                    dgRooms.ItemsSource = GetRooms;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void AddDiscipline_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bool nameNoNull = !string.IsNullOrEmpty(DisciplineNameTB.Text);
+                bool shortNameNoNull = !string.IsNullOrEmpty(DisciplineShortNameTB.Text);
+
+                if (shortNameNoNull && nameNoNull)
+                {
+                    Disciplines disciplines = new Disciplines
+                    {
+                        Name = DisciplineNameTB.Text,
+                        ShortName = DisciplineShortNameTB.Text
+                    };
+
+                    Context.Disciplines.Add(disciplines);
+                    Context.SaveChanges();
+                    DisciplineNameTB.ClearTB();
+                    DisciplineShortNameTB.ClearTB();
+                    dgDisciplines.ItemsSource = GetDisciplines;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void DeleteDiscipline_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Disciplines disciplines = dgDisciplines.SelectedItem as Disciplines;
+
+                if (disciplines != null)
+                {
+                    Context.Disciplines.Remove(disciplines);
+                    Context.SaveChanges();
+                    dgDisciplines.ItemsSource = GetDisciplines;
+                }
+                else
+                {
+                    MessageBox.Show("Нужно выбрать строку");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void EditDiscipline_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Disciplines disciplines = dgDisciplines.SelectedItem as Disciplines;
+                bool nameNoNull = !string.IsNullOrEmpty(DisciplineNameTB.Text);
+                bool shortNameNoNull = !string.IsNullOrEmpty(DisciplineShortNameTB.Text);
+
+                if (shortNameNoNull && nameNoNull && disciplines != null)
+                {
+                    disciplines.Name = RoomNameTB.Text;
+                    disciplines.ShortName = NumberRoomTB.Text;
+
+                    Context.SaveChanges();
+                    DisciplineNameTB.ClearTB();
+                    DisciplineShortNameTB.ClearTB();
+                    dgDisciplines.ItemsSource = GetDisciplines;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+
     }
 }

@@ -106,7 +106,6 @@ namespace ScheduleGTT
             {
                 MessageBox.Show(ex.ToString());
             }
-
         }
 
         private void DeleteTypeLesson_Click(object sender, RoutedEventArgs e)
@@ -142,6 +141,153 @@ namespace ScheduleGTT
                     LessonTypeNameTB.ClearTB();
                     Context.SaveChanges();
                     dgLessonsType.ItemsSource = GetLessonTypes;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void AddSpecialities_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(SpecialityNameTB.Text))
+                {
+                    Specialities specialities = new Specialities
+                    {
+                        Name = SpecialityNameTB.Text
+                    };
+
+                    Context.Specialities.Add(specialities);
+                    Context.SaveChanges();
+                    SpecialityNameTB.ClearTB();
+                    dgSpecialities.ItemsSource = GetSpecialities;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void DeleteSpecialities_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Specialities specialities = dgSpecialities.SelectedItem as Specialities;
+                if (specialities != null)
+                {
+                    Context.Specialities.Remove(specialities);
+                    Context.SaveChanges();
+                    dgSpecialities.ItemsSource = GetSpecialities;
+                }
+                else
+                {
+                    MessageBox.Show("Нужно выбрать строку");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void EditSpecialities_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Specialities specialities = dgSpecialities.SelectedItem as Specialities;
+                if (specialities != null && !string.IsNullOrEmpty(SpecialityNameTB.Text))
+                {
+                    specialities.Name = SpecialityNameTB.Text;
+                    SpecialityNameTB.ClearTB();
+                    Context.SaveChanges();
+                    dgSpecialities.ItemsSource = GetSpecialities;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void AddGroup_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {               
+                Specialities speciality = SpecialityCB.SelectedItem as Specialities;
+                GroupTypes groupTypes = GroupTypeCB.SelectedItem as GroupTypes;
+                bool groupNoEmpty = !string.IsNullOrEmpty(GroupNameTB.Text);
+
+                if (speciality != null && groupTypes != null && groupNoEmpty)
+                {
+                    Groups groups = new Groups
+                    {
+                        Name = GroupNameTB.Text,
+                        Speciality = speciality.Id,
+                        GroupType = groupTypes.Id
+                    };
+
+                    Context.Groups.Add(groups);
+                    Context.SaveChanges();
+                    GroupNameTB.ClearTB();
+                    dgGroups.ItemsSource = GetGroups;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void DeleteGroup_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Groups group = dgGroups.SelectedItem as Groups;
+                
+                if (group != null)
+                {
+                    Context.Groups.Remove(group);
+                    Context.SaveChanges();
+                    dgGroups.ItemsSource = GetGroups;
+                }
+                else
+                {
+                    MessageBox.Show("Нужно выбрать строку");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+        private void EditGroup_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Specialities speciality = SpecialityCB.SelectedItem as Specialities;
+                GroupTypes groupTypes = GroupTypeCB.SelectedItem as GroupTypes;
+                Groups groupsTable = dgGroups.SelectedItem as Groups;
+                bool groupNoEmpty = !string.IsNullOrEmpty(GroupNameTB.Text);
+                bool noNull = speciality != null && groupTypes != null && groupNoEmpty && groupsTable != null;
+
+                if (noNull)
+                {
+                    groupsTable = new Groups
+                    {
+                        Name = GroupNameTB.Text,
+                        Speciality = speciality.Id,
+                        GroupType = groupTypes.Id
+                    };
+
+                    Context.SaveChanges();
+                    GroupNameTB.ClearTB();
+                    dgGroups.ItemsSource = GetGroups;
                 }
             }
             catch (Exception ex)

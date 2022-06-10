@@ -125,16 +125,19 @@
 
                             <StackPanel>
                                 <TextBlock Text="Название"/>
-                                <TextBox Name="SpecialisationNameTB"/>
+                                <TextBox Name="SpecialityNameTB"/>
                             </StackPanel>
 
                             <Menu Grid.Row="1">
                                 <MenuItem Header="Добавить"
-                                          Name="AddSpecialities"/>
+                                          Name="AddSpecialities"
+                                          Click="AddSpecialities_Click"/>
                                 <MenuItem Header="Удалить"
-                                          Name="DeleteSpecialities"/>
+                                          Name="DeleteSpecialities"
+                                          Click="DeleteSpecialities_Click"/>
                                 <MenuItem Header="Изменить"
-                                          Name="EditSpecialities"/>
+                                          Name="EditSpecialities"
+                                          Click="EditSpecialities_Click"/>
                             </Menu>
 
                             <DataGrid Name="dgSpecialities"
@@ -159,21 +162,27 @@
                             </Grid.RowDefinitions>
 
                             <Menu Grid.Row="1">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
+                                <MenuItem Header="Добавить"
+                                          Name="AddGroup"
+                                          Click="AddGroup_Click"/>
+                                <MenuItem Header="Удалить"
+                                          Name="DeleteGroup"
+                                          Click="DeleteGroup_Click"/>
+                                <MenuItem Header="Изменить"
+                                          Name="EditGroup"
+                                          Click="EditGroup_Click"/>
                             </Menu>
                             
                             <StackPanel>
                                 <TextBlock Text="Название"/>
                                 <TextBox Name="GroupNameTB"/>
                                 <TextBlock Text="Специальность"/>
-                                <ComboBox Name="SpecialisationCB"
+                                <ComboBox Name="SpecialityCB"
                                           ItemsSource="{Binding Path=GetSpecialities}"
                                           SelectedIndex="0"
                                           DisplayMemberPath="Name"/>
                                 <TextBlock Text="Тип группы"/>
-                                <ComboBox Name="TypeGroupCB"
+                                <ComboBox Name="GroupTypeCB"
                                           ItemsSource="{Binding Path=GetGroupTypes}"
                                           SelectedIndex="0"
                                           DisplayMemberPath="Name"/>

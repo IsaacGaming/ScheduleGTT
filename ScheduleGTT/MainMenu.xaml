@@ -13,7 +13,7 @@
     <Window.DataContext>
         <database:ScheduleGTT_Context/>
     </Window.DataContext>
-    
+
     <Window.Resources>
         <Style TargetType="local:MainMenu">
             <Setter Property="Title" Value="Главное меню"/>
@@ -23,7 +23,7 @@
             <Setter Property="MinHeight" Value="800"/>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -89,7 +89,7 @@
                                 <TextBlock Text="Название"/>
                                 <TextBox Name="LessonTypeNameTB"/>
                             </StackPanel>
-                            
+
                             <Menu Grid.Row="1">
                                 <MenuItem Header="Добавить"
                                           Name="AddTypeLesson"
@@ -172,7 +172,7 @@
                                           Name="EditGroup"
                                           Click="EditGroup_Click"/>
                             </Menu>
-                            
+
                             <StackPanel>
                                 <TextBlock Text="Название"/>
                                 <TextBox Name="GroupNameTB"/>
@@ -219,7 +219,7 @@
                                 <TextBlock Text="Название"/>
                                 <TextBox Name="RoomNameTB"/>
                             </StackPanel>
-                            
+
                             <Menu Grid.Row="1">
                                 <MenuItem Header="Добавить"
                                           Name="AddRoom"
@@ -327,7 +327,7 @@
                                 </DataGrid.Columns>
                             </DataGrid>
 
-                            <DataGrid Name="dgTeachLessons"
+                            <DataGrid Name="dgTeacherLessons"
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       Grid.RowSpan="2"
@@ -339,7 +339,7 @@
                                                         Binding="{Binding Path=Teachers.FullName}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            
+
                             <Menu Grid.Row="3">
                                 <MenuItem Header="Добавить"/>
                                 <MenuItem Header="Удалить"/>
@@ -354,6 +354,61 @@
 
             <TabItem Header="Документы">
                 <TabControl TabStripPlacement="Top">
+                    <TabItem Header="Расписание звонков">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.4*"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="85*"/>
+                                <ColumnDefinition Width="309*"/>
+                                <ColumnDefinition Width="787*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.RowSpan="2" 
+                                        Grid.ColumnSpan="2">
+                                <TextBlock Text="Название урока"/>
+                                <TextBox Name="BellNameTB"/>
+                                <TextBlock Text="Начало урока"/>
+                                <TextBox Name="BeginLessonTB"/>
+                                <TextBlock Text="Конец урока"/>
+                                <TextBox Name="EndLessonTB"/>
+                            </StackPanel>
+
+                            <Menu Grid.Row="2" Grid.ColumnSpan="2">
+                                <MenuItem Header="Добавить"
+                                          Name="AddBell"
+                                          Click="AddBell_Click"/>
+                                <MenuItem Header="Удалить"
+                                          Name="DeleteBell"
+                                          Click="DeleteBell_Click"/>
+                                <MenuItem Header="Изменить"
+                                          Name="EditBell"
+                                          Click="EditBell_Click"/>
+                            </Menu>
+
+                            <DataGrid Name="dgScheduleBells"
+                                      Grid.Row="0"
+                                      Grid.Column="2"
+                                      Grid.RowSpan="3"
+                                      ItemsSource="{Binding GetScheduleBells}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Ид"
+                                                        Binding="{Binding Path=Id}"/>
+                                    <DataGridTextColumn Header="Название урока"
+                                                        Binding="{Binding Path=Name}"/>
+                                    <DataGridTextColumn Header="Начало урока"
+                                                        Binding="{Binding Path=BeginBell, StringFormat=\{0:HH:mm\}}"/>
+                                    <DataGridTextColumn Header="Конец урока"
+                                                        Binding="{Binding Path=EndBell, StringFormat=\{0:HH:mm\}}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+
                     <TabItem Header="Расписание занятий">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -370,37 +425,37 @@
                             <StackPanel Grid.Column="0"
                                         Grid.RowSpan="2">
                                 <TextBlock Text="Дисциплина"/>
-                                <ComboBox Name="cbDisciplines"
-                                              ItemsSource="{Binding Path=GetDisciplines}"
-                                              SelectedIndex="0"
-                                              DisplayMemberPath="Name"/>
+                                <ComboBox Name="DisciplinesCB"
+                                          ItemsSource="{Binding Path=GetDisciplines}"
+                                          SelectedIndex="0"
+                                          DisplayMemberPath="Name"/>
                                 <TextBlock Text="Преподаватель"/>
-                                <ComboBox Name="cbTeachers"
-                                              ItemsSource="{Binding Path=GetTeachers}"
-                                              SelectedIndex="0"
-                                              DisplayMemberPath="FullName"/>
+                                <ComboBox Name="TeachersCB"
+                                          ItemsSource="{Binding Path=GetTeachers}"
+                                          SelectedIndex="0"
+                                          DisplayMemberPath="FullName"/>
                                 <TextBlock Text="Дата дня"/>
-                                <DatePickerTextBox Name="tbDate"/>
+                                <TextBox Name="DateTB"/>
                                 <TextBlock Text="Группа"/>
-                                <ComboBox Name="cbGroups"
-                                              ItemsSource="{Binding Path=GetGroups}"
-                                              SelectedIndex="0"
-                                              DisplayMemberPath="Name"/>
+                                <ComboBox Name="GroupsCB"
+                                          ItemsSource="{Binding Path=GetGroups}"
+                                          SelectedIndex="0"
+                                          DisplayMemberPath="Name"/>
                                 <TextBlock Text="Название звонка"/>
-                                <ComboBox Name="cbNameBell"
-                                              ItemsSource="{Binding Path=GetScheduleBells}"
-                                              SelectedIndex="0"
-                                              DisplayMemberPath="Name"/>
+                                <ComboBox Name="NameBellCB"
+                                          ItemsSource="{Binding Path=GetScheduleBells}"
+                                          SelectedIndex="0"
+                                          DisplayMemberPath="Name"/>
                                 <TextBlock Text="Помещение"/>
-                                <ComboBox Name="cbRooms"
-                                              SelectedIndex="0"
-                                              ItemsSource="{Binding Path=GetRooms}"
-                                              DisplayMemberPath="NumberRoom"/>
+                                <ComboBox Name="RoomsCB"
+                                          SelectedIndex="0"
+                                          ItemsSource="{Binding Path=GetRooms}"
+                                          DisplayMemberPath="NumberRoom"/>
                                 <TextBlock Text="Тип занятия"/>
-                                <ComboBox Name="cbTypeLessons"
-                                              SelectedIndex="0"
-                                              ItemsSource="{Binding Path=GetLessonTypes}"
-                                              DisplayMemberPath="Name"/>
+                                <ComboBox Name="TypeLessonsCB"
+                                          SelectedIndex="0"
+                                          ItemsSource="{Binding Path=GetLessonTypes}"
+                                          DisplayMemberPath="Name"/>
                             </StackPanel>
 
                             <DataGrid Name="dgScheduleLessons"
@@ -417,7 +472,8 @@
                                     <DataGridTextColumn Header="Преподаватель"
                                                         Binding="{Binding Path=Teachers.FullName}"/>
                                     <DataGridTextColumn Header="Дата дня"
-                                                        Binding="{Binding Path=DateLesson, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                                                        Binding="{Binding Path=DateLesson, 
+                                                                          StringFormat=\{0:dd.MM.yyyy\}}"/>
                                     <DataGridTextColumn Header="Группа"
                                                         Binding="{Binding Path=Groups.Name}"/>
                                     <DataGridTextColumn Header="Название звонка"
@@ -430,58 +486,18 @@
                             </DataGrid>
 
                             <Menu Grid.Row="3">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
-                                <MenuItem Header="Создать отчет"
-                                          Name="ImportScheduleLessons"/>
-                            </Menu>
-                        </Grid>
-                    </TabItem>
-
-                    <TabItem Header="Расписание звонков">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.4*"/>
-                                <RowDefinition/>
-                                <RowDefinition Height="40"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.5*"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.RowSpan="2">
-                                <TextBlock Text="Название урока"/>
-                                <TextBox Name="NameLessonTB"/>
-                                <TextBlock Text="Начало урока"/>
-                                <TextBox Name="BeginLessonTB"/>
-                                <TextBlock Text="Конец урока"/>
-                                <TextBox Name="EndLessonTB"/>
-                            </StackPanel>
-
-                            <DataGrid Name="dgScheduleRings"
-                                      Grid.Row="0"
-                                      Grid.Column="1"
-                                      Grid.RowSpan="3"
-                                      ItemsSource="{Binding GetScheduleBells}">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Ид"
-                                                        Binding="{Binding Path=Id}"/>
-                                    <DataGridTextColumn Header="Название урока"
-                                                        Binding="{Binding Path=Name}"/>
-                                    <DataGridTextColumn Header="Начало урока"
-                                                        Binding="{Binding Path=BeginBell, StringFormat=\{0:HH:mm\}}"/>
-                                    <DataGridTextColumn Header="Конец урока"
-                                                        Binding="{Binding Path=EndBell, StringFormat=\{0:HH:mm\}}"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-
-                            <Menu Grid.Row="3">
-                                <MenuItem Header="Добавить"/>
-                                <MenuItem Header="Удалить"/>
-                                <MenuItem Header="Изменить"/>
+                                <MenuItem Header="Добавить"
+                                          Name="AddScheduleLesson"
+                                          Click="AddScheduleLesson_Click"/>
+                                <MenuItem Header="Удалить"
+                                          Name="DeleteScheduleLesson"
+                                          Click="DeleteScheduleLesson_Click"/>
+                                <MenuItem Header="Изменить"
+                                          Name="EditScheduleLesson"
+                                          Click="EditScheduleLesson_Click"/>
+                                <MenuItem Header="Создать отчет Excel"
+                                          Name="ImportScheduleLessons"
+                                          Click="ImportScheduleLessons_Click"/>
                             </Menu>
                         </Grid>
                     </TabItem>

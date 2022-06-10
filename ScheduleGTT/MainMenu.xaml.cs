@@ -447,6 +447,194 @@ namespace ScheduleGTT
             }
         }
 
+        private void AddBell_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bool nameNoNull = !string.IsNullOrEmpty(BellNameTB.Text);
+                bool beginBellNoNull = !string.IsNullOrEmpty(BeginLessonTB.Text);
+                bool endBellNoNull = !string.IsNullOrEmpty(EndLessonTB.Text);
 
+                if (nameNoNull && beginBellNoNull && endBellNoNull)
+                {
+                    ScheduleBell scheduleBell = new ScheduleBell
+                    {
+                        Name = BellNameTB.Text,
+                        BeginBell = Convert.ToDateTime(BeginLessonTB.Text),
+                        EndBell = Convert.ToDateTime(EndLessonTB.Text)
+                    };
+
+                    Context.ScheduleBell.Add(scheduleBell);
+                    Context.SaveChanges();
+                    BellNameTB.ClearTB();
+                    BeginLessonTB.ClearTB();
+                    EndLessonTB.ClearTB();
+                    dgScheduleBells.ItemsSource = GetScheduleBells;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void DeleteBell_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ScheduleBell scheduleBell = dgScheduleBells.SelectedItem as ScheduleBell;
+
+                if (scheduleBell != null)
+                {
+                    Context.ScheduleBell.Remove(scheduleBell);
+                    Context.SaveChanges();
+                    dgScheduleBells.ItemsSource = GetScheduleBells;
+                }
+                else
+                {
+                    MessageBox.Show("Нужно выбрать строку");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void EditBell_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                bool nameNoNull = !string.IsNullOrEmpty(BellNameTB.Text);
+                bool beginBellNoNull = !string.IsNullOrEmpty(BeginLessonTB.Text);
+                bool endBellNoNull = !string.IsNullOrEmpty(EndLessonTB.Text);
+                ScheduleBell scheduleBell = dgScheduleBells.SelectedItem as ScheduleBell;
+
+                if (nameNoNull && beginBellNoNull && endBellNoNull && scheduleBell != null)
+                {
+                    scheduleBell.Name = BellNameTB.Text;
+                    scheduleBell.BeginBell = Convert.ToDateTime(BeginLessonTB.Text);
+                    scheduleBell.EndBell = Convert.ToDateTime(EndLessonTB.Text);
+                    
+                    Context.SaveChanges();
+                    BellNameTB.ClearTB();
+                    BeginLessonTB.ClearTB();
+                    EndLessonTB.ClearTB();
+                    dgScheduleBells.ItemsSource = GetScheduleBells;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void AddScheduleLesson_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Disciplines disciplines = DisciplinesCB.SelectedItem as Disciplines;
+                Teachers teachers = TeachersCB.SelectedItem as Teachers;
+                Groups groups = GroupsCB.SelectedItem as Groups;
+                ScheduleBell scheduleBell = NameBellCB.SelectedItem as ScheduleBell;
+                Rooms rooms = RoomsCB.SelectedItem as Rooms;
+                LessonTypes lessonTypes = TypeLessonsCB.SelectedItem as LessonTypes;
+
+                DateTime dateLesson = Convert.ToDateTime(DateTB.Text);
+
+                if (string.IsNullOrEmpty(dateLesson.ToString()))
+                {
+                    ScheduleLessons scheduleLessons = new ScheduleLessons
+                    {
+                        DateLesson = dateLesson,
+                        Discipline = disciplines.Id,
+                        Teacher = teachers.Id,
+                        LessonType = lessonTypes.Id,
+                        GroupId = groups.Id,
+                        ScheduleBell = scheduleBell.Id,
+                        Room = rooms.Id
+                    };
+
+                    Context.ScheduleLessons.Add(scheduleLessons);
+                    Context.SaveChanges();
+                    DateTB.ClearTB();
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void DeleteScheduleLesson_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ScheduleLessons scheduleLessons = dgScheduleLessons.SelectedItem as ScheduleLessons;
+                int selectedRowCount = dgScheduleLessons.Items.Count;
+
+                if (scheduleLessons != null && selectedRowCount == 1)
+                {
+                    Context.ScheduleLessons.Remove(scheduleLessons);
+                    Context.SaveChanges();
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void EditScheduleLesson_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Disciplines disciplines = DisciplinesCB.SelectedItem as Disciplines;
+                Teachers teachers = TeachersCB.SelectedItem as Teachers;
+                Groups groups = GroupsCB.SelectedItem as Groups;
+                ScheduleBell scheduleBell = NameBellCB.SelectedItem as ScheduleBell;
+                Rooms rooms = RoomsCB.SelectedItem as Rooms;
+                LessonTypes lessonTypes = TypeLessonsCB.SelectedItem as LessonTypes;
+
+                ScheduleLessons scheduleLessons = dgScheduleLessons.SelectedItem as ScheduleLessons;
+                int selectedRowCount = dgScheduleLessons.Items.Count;
+
+                DateTime dateLesson = Convert.ToDateTime(DateTB.Text);
+                bool dateNoEmpty = string.IsNullOrEmpty(dateLesson.ToString());
+
+                if (scheduleLessons != null && selectedRowCount == 1 && dateNoEmpty)
+                {
+                    scheduleLessons.DateLesson = dateLesson;
+                    scheduleLessons.Discipline = disciplines.Id;
+                    scheduleLessons.Teacher = teachers.Id;
+                    scheduleLessons.LessonType = lessonTypes.Id;
+                    scheduleLessons.GroupId = groups.Id;
+                    scheduleLessons.ScheduleBell = scheduleBell.Id;
+                    scheduleLessons.Room = rooms.Id;
+                    
+                    Context.SaveChanges();
+                    DateTB.ClearTB();
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void ImportScheduleLessons_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }

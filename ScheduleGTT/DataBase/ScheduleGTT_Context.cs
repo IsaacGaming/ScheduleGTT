@@ -56,7 +56,7 @@ namespace ScheduleGTT.DataBase
             }
         }
 
-        public virtual List<ScheduleBell> GetScheduleBells => Context.ScheduleBell.ToList();
+        public static List<ScheduleBell> GetScheduleBells => Context.ScheduleBell.ToList();
         #endregion
 
         #region DbSets

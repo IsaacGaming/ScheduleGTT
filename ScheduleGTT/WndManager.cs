@@ -6,6 +6,11 @@ namespace ScheduleGTT
 {
     internal static class WndManager
     {
+        /// <summary>
+        /// Выводит сообщение об выходе из системы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         internal static void WarningOnClose(object sender, CancelEventArgs e)
         {
             string text = "Вы хотите закрыть приложение?",
@@ -25,6 +30,11 @@ namespace ScheduleGTT
             }
         }
 
+        /// <summary>
+        /// Расширяющий метод очистки TextBox
+        /// </summary>
+        /// <param name="textBox"></param>
+        /// <returns></returns>
         internal static string ClearTB(this TextBox textBox)
         {
             return string.Empty;

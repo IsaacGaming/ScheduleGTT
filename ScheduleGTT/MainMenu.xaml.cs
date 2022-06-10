@@ -629,7 +629,37 @@ namespace ScheduleGTT
         {
             try
             {
+                //инициализация приложения Excel
+                Excel.Application excel = new Excel.Application
+                {
+                    Visible = true
+                };
+                //создает книгу
+                Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+                //создает лист               
+                Excel.Worksheet sheet1 = (Excel.Worksheet)workbook.Sheets[1];
 
+                //создание заголовков таблицы
+                for (int j = 0; j < dgScheduleLessons.Columns.Count; j++)
+                {
+                    Excel.Range myRange = (Excel.Range)sheet1.Cells[1, j + 1];
+                    sheet1.Cells[1, j + 1].Font.Bold = true;
+                    sheet1.Columns[j + 1].ColumnWidth = 50;
+                    myRange.Value2 = dgScheduleLessons.Columns[j].Header;
+                }
+
+                //заполнение данных в таблицу
+                for (int i = 0; i < dgScheduleLessons.Columns.Count; i++)
+                {
+                    for (int j = 0; j < dgScheduleLessons.Items.Count; j++)
+                    {
+                        TextBlock b = dgScheduleLessons.Columns[i].GetCellContent(dgScheduleLessons.Items[j]) as TextBlock;
+                        Excel.Range myRange = (Excel.Range)sheet1.Cells[j + 2, i + 1];
+                        myRange.Value2 = b.Text;
+                    }
+                }
+                //автоподбор размера столбцов
+                sheet1.Columns.AutoFit();
             }
             catch (Exception ex)
             {

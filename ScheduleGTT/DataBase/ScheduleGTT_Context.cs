@@ -9,7 +9,7 @@ namespace ScheduleGTT.DataBase
     public partial class ScheduleGTT_Context : DbContext
     {
         public ScheduleGTT_Context()
-            : base("name=ScheduleGTT_Context_College")
+            : base("name=ScheduleGTT_Context")
         {
         }
 
@@ -66,6 +66,14 @@ namespace ScheduleGTT.DataBase
         }
 
         public static List<ScheduleBell> GetScheduleBells => Context.ScheduleBell.ToList();
+
+        public static List<TeacherDisciplines> GetTeacherDisciplines
+        {
+            get
+            {
+                return Context.TeacherDisciplines.Include(t => t.Teachers).Include(d => d.Disciplines).ToList();
+            }
+        }
         #endregion
 
         #region DbSets
@@ -78,6 +86,7 @@ namespace ScheduleGTT.DataBase
         public DbSet<ScheduleLessons> ScheduleLessons { get; set; }
         public DbSet<Specialities> Specialities { get; set; }
         public DbSet<Teachers> Teachers { get; set; }
+        public DbSet<TeacherDisciplines> TeacherDisciplines { get; set; }
         #endregion
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -89,10 +98,7 @@ namespace ScheduleGTT.DataBase
 
             modelBuilder.Entity<Disciplines>()
                 .HasMany(e => e.Teachers)
-                .WithMany(e => e.Disciplines)
-                .Map(m => m.ToTable("TeacherDisciplines")
-                        .MapLeftKey("DisciplineId")
-                        .MapRightKey("TeacherId"));
+                .WithMany(e => e.Disciplines);
 
             modelBuilder.Entity<Groups>()
                 .HasMany(e => e.ScheduleLessons)

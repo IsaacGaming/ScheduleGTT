@@ -84,6 +84,7 @@
     <Compile Include="DataBase\ScheduleGTT_Context.cs" />
     <Compile Include="DataBase\ScheduleLessons.cs" />
     <Compile Include="DataBase\Specialities.cs" />
+    <Compile Include="DataBase\TeacherDisciplines.cs" />
     <Compile Include="DataBase\Teachers.cs" />
     <Compile Include="WndManager.cs" />
   </ItemGroup>

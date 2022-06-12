@@ -28,7 +28,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.4*"/>
             <RowDefinition/>
-            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -39,34 +39,34 @@
         <StackPanel Grid.Column="0"
                     Grid.RowSpan="2">
             <TextBlock Text="Дисциплина"/>
-            <ComboBox Name="cbDisciplines"
+            <ComboBox Name="DisciplinesCB"
                       ItemsSource="{Binding Path=GetDisciplines}"
                       SelectedIndex="0"
                       DisplayMemberPath="Name"/>
             <TextBlock Text="Преподаватель"/>
-            <ComboBox Name="cbTeachers"
+            <ComboBox Name="TeachersCB"
                       ItemsSource="{Binding Path=GetTeachers}"
                       SelectedIndex="0"
                       DisplayMemberPath="FullName"/>
             <TextBlock Text="Дата дня"/>
-            <DatePickerTextBox Name="tbDate"/>
+            <TextBox Name="DateTB"/>
             <TextBlock Text="Группа"/>
-            <ComboBox Name="cbGroups"
+            <ComboBox Name="GroupsCB"
                       ItemsSource="{Binding Path=GetGroups}"
                       SelectedIndex="0"
                       DisplayMemberPath="Name"/>
             <TextBlock Text="Название звонка"/>
-            <ComboBox Name="cbNameBell"
+            <ComboBox Name="NameBellCB"
                       ItemsSource="{Binding Path=GetScheduleBells}"
                       SelectedIndex="0"
                       DisplayMemberPath="Name"/>
             <TextBlock Text="Помещение"/>
-            <ComboBox Name="cbRooms"
+            <ComboBox Name="RoomsCB"
                       SelectedIndex="0"
                       ItemsSource="{Binding Path=GetRooms}"
                       DisplayMemberPath="NumberRoom"/>
             <TextBlock Text="Тип занятия"/>
-            <ComboBox Name="cbTypeLessons"
+            <ComboBox Name="TypeLessonsCB"
                       SelectedIndex="0"
                       ItemsSource="{Binding Path=GetLessonTypes}"
                       DisplayMemberPath="Name"/>
@@ -86,7 +86,8 @@
                 <DataGridTextColumn Header="Преподаватель"
                                     Binding="{Binding Path=Teachers.FullName}"/>
                 <DataGridTextColumn Header="Дата дня"
-                                    Binding="{Binding Path=DateLesson, StringFormat=\{0:dd.MM.yyyy\}}"/>
+                                    Binding="{Binding Path=DateLesson, 
+                                                      StringFormat=\{0:dd.MM.yyyy\}}"/>
                 <DataGridTextColumn Header="Группа"
                                     Binding="{Binding Path=Groups.Name}"/>
                 <DataGridTextColumn Header="Название звонка"
@@ -99,10 +100,18 @@
         </DataGrid>
 
         <Menu Grid.Row="3">
-            <MenuItem Header="Добавить"/>
-            <MenuItem Header="Удалить"/>
-            <MenuItem Header="Изменить"/>
-            <MenuItem Header="Создать отчет"/>
+            <MenuItem Header="Добавить"
+                      Name="AddScheduleLesson"
+                      Click="AddScheduleLesson_Click"/>
+            <MenuItem Header="Удалить"
+                      Name="DeleteScheduleLesson"
+                      Click="DeleteScheduleLesson_Click"/>
+            <MenuItem Header="Изменить"
+                      Name="EditScheduleLesson"
+                      Click="EditScheduleLesson_Click"/>
+            <MenuItem Header="Создать отчет Excel"
+                      Name="ImportScheduleLessons"
+                      Click="ImportScheduleLessons_Click"/>
         </Menu>
     </Grid>
 </Window>

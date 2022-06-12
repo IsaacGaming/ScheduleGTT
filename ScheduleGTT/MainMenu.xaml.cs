@@ -1,16 +1,7 @@
-﻿using Microsoft.Win32;
+﻿using ScheduleGTT.DataBase;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using ScheduleGTT.DataBase;
-using Excel = Microsoft.Office.Interop.Excel;
-using System.Linq;
-using System.Data.Entity;
 using static ScheduleGTT.DataBase.ScheduleGTT_Context;
 
 namespace ScheduleGTT
@@ -43,6 +34,8 @@ namespace ScheduleGTT
                     Context.SaveChanges();
                     GroupTypeNameTB.ClearTB();
                     dgGroupType.ItemsSource = GetGroupTypes;
+                    GroupTypeCB.ItemsSource = GetGroupTypes;
+                    dgGroups.ItemsSource = GetGroups;
                 }
             }
             catch (Exception ex)
@@ -61,6 +54,8 @@ namespace ScheduleGTT
                     Context.GroupTypes.Remove(groupTypes);
                     Context.SaveChanges();
                     dgGroupType.ItemsSource = GetGroupTypes;
+                    GroupTypeCB.ItemsSource = GetGroupTypes;
+                    dgGroups.ItemsSource = GetGroups;
                 }
             }
             catch (Exception ex)
@@ -78,6 +73,8 @@ namespace ScheduleGTT
                 GroupTypeNameTB.ClearTB();
                 Context.SaveChanges();
                 dgGroupType.ItemsSource = GetGroupTypes;
+                GroupTypeCB.ItemsSource = GetGroupTypes;
+                dgGroups.ItemsSource = GetGroups;
             }
         }
 
@@ -96,6 +93,8 @@ namespace ScheduleGTT
                     Context.SaveChanges();
                     LessonTypeNameTB.ClearTB();
                     dgLessonsType.ItemsSource = GetLessonTypes;
+                    TypeLessonsCB.ItemsSource = GetLessonTypes;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -114,6 +113,8 @@ namespace ScheduleGTT
                     Context.LessonTypes.Remove(lessonTypes);
                     Context.SaveChanges();
                     dgLessonsType.ItemsSource = GetLessonTypes;
+                    TypeLessonsCB.ItemsSource = GetLessonTypes;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -133,6 +134,8 @@ namespace ScheduleGTT
                     LessonTypeNameTB.ClearTB();
                     Context.SaveChanges();
                     dgLessonsType.ItemsSource = GetLessonTypes;
+                    TypeLessonsCB.ItemsSource = GetLessonTypes;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -156,6 +159,7 @@ namespace ScheduleGTT
                     Context.SaveChanges();
                     SpecialityNameTB.ClearTB();
                     dgSpecialities.ItemsSource = GetSpecialities;
+                    SpecialityCB.ItemsSource = GetSpecialities;
                 }
             }
             catch (Exception ex)
@@ -174,6 +178,7 @@ namespace ScheduleGTT
                     Context.Specialities.Remove(specialities);
                     Context.SaveChanges();
                     dgSpecialities.ItemsSource = GetSpecialities;
+                    SpecialityCB.ItemsSource = GetSpecialities;
                 }
             }
             catch (Exception ex)
@@ -193,6 +198,7 @@ namespace ScheduleGTT
                     SpecialityNameTB.ClearTB();
                     Context.SaveChanges();
                     dgSpecialities.ItemsSource = GetSpecialities;
+                    SpecialityCB.ItemsSource = GetSpecialities;
                 }
             }
             catch (Exception ex)
@@ -209,7 +215,7 @@ namespace ScheduleGTT
                 GroupTypes groupTypes = GroupTypeCB.SelectedItem as GroupTypes;
                 bool groupNoEmpty = !string.IsNullOrEmpty(GroupNameTB.Text);
 
-                if (speciality != null && groupTypes != null && groupNoEmpty)
+                if (groupTypes != null && groupNoEmpty)
                 {
                     Groups groups = new Groups
                     {
@@ -222,6 +228,7 @@ namespace ScheduleGTT
                     Context.SaveChanges();
                     GroupNameTB.ClearTB();
                     dgGroups.ItemsSource = GetGroups;
+                    GroupsCB.ItemsSource = GetGroups;
                 }
             }
             catch (Exception ex)
@@ -241,6 +248,7 @@ namespace ScheduleGTT
                     Context.Groups.Remove(group);
                     Context.SaveChanges();
                     dgGroups.ItemsSource = GetGroups;
+                    GroupsCB.ItemsSource = GetGroups;
                 }
             }
             catch (Exception ex)
@@ -257,7 +265,7 @@ namespace ScheduleGTT
                 GroupTypes groupTypes = GroupTypeCB.SelectedItem as GroupTypes;
                 Groups groupsTable = dgGroups.SelectedItem as Groups;
                 bool groupNoEmpty = !string.IsNullOrEmpty(GroupNameTB.Text);
-                bool noNull = speciality != null && groupTypes != null && groupNoEmpty && groupsTable != null;
+                bool noNull = groupNoEmpty && groupsTable != null;
 
                 if (noNull)
                 {
@@ -271,6 +279,7 @@ namespace ScheduleGTT
                     Context.SaveChanges();
                     GroupNameTB.ClearTB();
                     dgGroups.ItemsSource = GetGroups;
+                    GroupsCB.ItemsSource = GetGroups;
                 }
             }
             catch (Exception ex)
@@ -299,6 +308,8 @@ namespace ScheduleGTT
                     NumberRoomTB.ClearTB();
                     RoomNameTB.ClearTB();
                     dgRooms.ItemsSource = GetRooms;
+                    RoomsCB.ItemsSource = GetRooms;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -318,6 +329,8 @@ namespace ScheduleGTT
                     Context.Rooms.Remove(room);
                     Context.SaveChanges();
                     dgRooms.ItemsSource = GetRooms;
+                    RoomsCB.ItemsSource = GetRooms;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -343,6 +356,8 @@ namespace ScheduleGTT
                     NumberRoomTB.ClearTB();
                     RoomNameTB.ClearTB();
                     dgRooms.ItemsSource = GetRooms;
+                    RoomsCB.ItemsSource = GetRooms;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -371,6 +386,8 @@ namespace ScheduleGTT
                     DisciplineNameTB.ClearTB();
                     DisciplineShortNameTB.ClearTB();
                     dgDisciplines.ItemsSource = GetDisciplines;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
+                    DisciplinesCB.ItemsSource = GetDisciplines;
                 }
             }
             catch (Exception ex)
@@ -390,6 +407,9 @@ namespace ScheduleGTT
                     Context.Disciplines.Remove(disciplines);
                     Context.SaveChanges();
                     dgDisciplines.ItemsSource = GetDisciplines;
+
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
+                    DisciplinesCB.ItemsSource = GetDisciplines;
                 }
             }
             catch (Exception ex)
@@ -415,6 +435,7 @@ namespace ScheduleGTT
                     DisciplineNameTB.ClearTB();
                     DisciplineShortNameTB.ClearTB();
                     dgDisciplines.ItemsSource = GetDisciplines;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -446,6 +467,7 @@ namespace ScheduleGTT
                     BeginLessonTB.ClearTB();
                     EndLessonTB.ClearTB();
                     dgScheduleBells.ItemsSource = GetScheduleBells;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -465,6 +487,7 @@ namespace ScheduleGTT
                     Context.ScheduleBell.Remove(scheduleBell);
                     Context.SaveChanges();
                     dgScheduleBells.ItemsSource = GetScheduleBells;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -493,6 +516,7 @@ namespace ScheduleGTT
                     BeginLessonTB.ClearTB();
                     EndLessonTB.ClearTB();
                     dgScheduleBells.ItemsSource = GetScheduleBells;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -599,44 +623,7 @@ namespace ScheduleGTT
 
         private void ImportScheduleLessons_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                //инициализация приложения Excel
-                Excel.Application excel = new Excel.Application
-                {
-                    Visible = true
-                };
-                //создает книгу
-                Excel.Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
-                //создает лист               
-                Excel.Worksheet sheet1 = (Excel.Worksheet)workbook.Sheets[1];
-
-                //создание заголовков таблицы
-                for (int j = 0; j < dgScheduleLessons.Columns.Count; j++)
-                {
-                    Excel.Range myRange = (Excel.Range)sheet1.Cells[1, j + 1];
-                    sheet1.Cells[1, j + 1].Font.Bold = true;
-                    sheet1.Columns[j + 1].ColumnWidth = 50;
-                    myRange.Value2 = dgScheduleLessons.Columns[j].Header;
-                }
-
-                //заполнение данных в таблицу
-                for (int i = 0; i < dgScheduleLessons.Columns.Count; i++)
-                {
-                    for (int j = 0; j < dgScheduleLessons.Items.Count; j++)
-                    {
-                        TextBlock b = dgScheduleLessons.Columns[i].GetCellContent(dgScheduleLessons.Items[j]) as TextBlock;
-                        Excel.Range myRange = (Excel.Range)sheet1.Cells[j + 2, i + 1];
-                        myRange.Value2 = b.Text;
-                    }
-                }
-                //автоподбор размера столбцов
-                sheet1.Columns.AutoFit();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            dgScheduleLessons.ExportToExcel();
         }
 
         private void AddTeacher_Click(object sender, RoutedEventArgs e)
@@ -667,6 +654,10 @@ namespace ScheduleGTT
                     Context.Teachers.Add(teachers);
                     Context.SaveChanges();
                     dgTeachers.ItemsSource = GetTeachers;
+
+                    TeacherWithDisciplineCB.ItemsSource = GetTeachers;
+                    TeachersCB.ItemsSource = GetTeachers;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -686,6 +677,9 @@ namespace ScheduleGTT
                     Context.Teachers.Remove(teachers);
                     Context.SaveChanges();
                     dgTeachers.ItemsSource = GetTeachers;
+                    TeacherWithDisciplineCB.ItemsSource = GetTeachers;
+                    TeachersCB.ItemsSource = GetTeachers;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
@@ -720,11 +714,45 @@ namespace ScheduleGTT
 
                     Context.SaveChanges();
                     dgTeachers.ItemsSource = GetTeachers;
+                    TeacherWithDisciplineCB.ItemsSource = GetTeachers;
+                    TeachersCB.ItemsSource = GetTeachers;
+                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AddTeacherDisciplines_Click(object sender, RoutedEventArgs e)
+        {
+            Teachers teachers = TeacherWithDisciplineCB.SelectedItem as Teachers;
+            Disciplines disciplines = DisciplinesCB.SelectedItem as Disciplines;
+
+            TeacherDisciplines teacherDisciplines = new TeacherDisciplines()
+            {
+                TeacherId = teachers.Id,
+                DisciplineId = disciplines.Id
+            };
+
+            Context.TeacherDisciplines.Add(teacherDisciplines);
+            Context.SaveChanges();
+
+            dgTeacherLessons.ItemsSource = GetTeacherDisciplines;
+        }
+
+        private void DeleteTeacherDisciplines_Click(object sender, RoutedEventArgs e)
+        {
+            TeacherDisciplines teacherDisciplines = dgTeacherLessons.SelectedItems as TeacherDisciplines;
+           
+            Teachers teachers = TeacherWithDisciplineCB.SelectedItem as Teachers;
+            Disciplines disciplines = DisciplinesCB.SelectedItem as Disciplines;
+
+            if (teacherDisciplines != null)
+            {
+                teacherDisciplines.TeacherId = teachers.Id; 
+                teacherDisciplines.DisciplineId = disciplines.Id;   
             }
         }
     }

@@ -18,8 +18,8 @@
         <Style TargetType="local:MainMenu">
             <Setter Property="Title" Value="Главное меню"/>
             <Setter Property="Height" Value="800"/>
-            <Setter Property="Width" Value="1200"/>
-            <Setter Property="MinWidth" Value="1200"/>
+            <Setter Property="Width" Value="1000"/>
+            <Setter Property="MinWidth" Value="1000"/>
             <Setter Property="MinHeight" Value="800"/>
         </Style>
     </Window.Resources>
@@ -42,8 +42,8 @@
                     <TabItem Header="Типы группы">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="100"/>
-                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
@@ -118,8 +118,8 @@
                     <TabItem Header="Специальности">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="100"/>
-                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
@@ -156,8 +156,8 @@
                     <TabItem Header="Группы">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="280"/>
-                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
@@ -208,8 +208,8 @@
                     <TabItem Header="Помещения">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="180"/>
-                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
@@ -250,8 +250,8 @@
                     <TabItem Header="Дисциплины">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="180"/>
-                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
 
@@ -294,7 +294,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
@@ -313,6 +313,11 @@
                                 <ComboBox Name="TeacherDisciplinesCB"
                                           ItemsSource="{Binding Path=GetDisciplines}"
                                           DisplayMemberPath="Name"
+                                          SelectedIndex="1"/>
+                                <TextBlock Text="Преподаватель"/>
+                                <ComboBox Name="TeacherWithDisciplineCB"
+                                          ItemsSource="{Binding Path=GetTeachers}"
+                                          DisplayMemberPath="FullName"
                                           SelectedIndex="1"/>
                             </StackPanel>
 
@@ -353,8 +358,12 @@
                                 <MenuItem Header="Изменить"
                                           Name="EditTeacher"
                                           Click="EditTeacher_Click"/>
-                                <MenuItem Header="Добавить ПД"/>
-                                <MenuItem Header="Удалить ПД"/>
+                                <MenuItem Header="Добавить ПД"
+                                          Name="AddTeacherDisciplines"
+                                          Click="AddTeacherDisciplines_Click"/>
+                                <MenuItem Header="Удалить ПД"
+                                          Name="DeleteTeacherDisciplines"
+                                          Click="DeleteTeacherDisciplines_Click"/>
                             </Menu>
                         </Grid>
                     </TabItem>
@@ -372,13 +381,11 @@
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="85*"/>
-                                <ColumnDefinition Width="309*"/>
-                                <ColumnDefinition Width="787*"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.RowSpan="2" 
-                                        Grid.ColumnSpan="2">
+                            <StackPanel Grid.RowSpan="2">
                                 <TextBlock Text="Название урока"/>
                                 <TextBox Name="BellNameTB"/>
                                 <TextBlock Text="Начало урока"/>
@@ -387,7 +394,7 @@
                                 <TextBox Name="EndLessonTB"/>
                             </StackPanel>
 
-                            <Menu Grid.Row="2" Grid.ColumnSpan="2">
+                            <Menu Grid.Row="2">
                                 <MenuItem Header="Добавить"
                                           Name="AddBell"
                                           Click="AddBell_Click"/>
@@ -421,9 +428,9 @@
                     <TabItem Header="Расписание занятий">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="0.4*"/>
+                                <RowDefinition Height="auto"/>
                                 <RowDefinition/>
-                                <RowDefinition Height="60"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <Grid.ColumnDefinitions>

@@ -6,48 +6,48 @@
     <Application.Resources>
         <Style TargetType="StackPanel">
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="Background" Value="Cyan"/>
+            <Setter Property="Background" Value="YellowGreen"/>
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
 
         <Style TargetType="ComboBox">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
 
         <Style TargetType="DatePickerTextBox">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
 
         <Style TargetType="PasswordBox">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="PasswordChar" Value="*"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
 
         <Style TargetType="Button">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
 
         <Style TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
 
         <Style TargetType="Menu">
-            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Background" Value="Gray"/>
         </Style>
 
         <Style TargetType="TabControl">
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Background" Value="LightSlateGray"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="Gray"/>
         </Style>
 
         <Style TargetType="DataGrid">
@@ -58,7 +58,7 @@
             <Setter Property="Background" Value="YellowGreen"/>
             <Setter Property="HorizontalScrollBarVisibility" Value="Visible"/>
             <Setter Property="VerticalScrollBarVisibility" Value="Visible"/>
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="14"/>
         </Style>
     </Application.Resources>
 </Application>

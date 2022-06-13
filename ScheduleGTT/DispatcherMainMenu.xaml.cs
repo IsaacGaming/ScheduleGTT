@@ -27,26 +27,21 @@ namespace ScheduleGTT
                 Rooms rooms = RoomsCB.SelectedItem as Rooms;
                 LessonTypes lessonTypes = TypeLessonsCB.SelectedItem as LessonTypes;
 
-                DateTime dateLesson = Convert.ToDateTime(DateTB.Text);
-
-                if (string.IsNullOrEmpty(dateLesson.ToString()))
+                ScheduleLessons scheduleLessons = new ScheduleLessons
                 {
-                    ScheduleLessons scheduleLessons = new ScheduleLessons
-                    {
-                        DateLesson = dateLesson,
-                        Discipline = disciplines.Id,
-                        Teacher = teachers.Id,
-                        LessonType = lessonTypes.Id,
-                        GroupId = groups.Id,
-                        ScheduleBell = scheduleBell.Id,
-                        Room = rooms.Id
-                    };
+                    DateLesson = (DateTime)Date.SelectedDate,
+                    Discipline = disciplines.Id,
+                    Teacher = teachers.Id,
+                    LessonType = lessonTypes.Id,
+                    GroupId = groups.Id,
+                    ScheduleBell = scheduleBell.Id,
+                    Room = rooms.Id
+                };
 
-                    Context.ScheduleLessons.Add(scheduleLessons);
-                    Context.SaveChanges();
-                    DateTB.ClearTB();
-                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
-                }
+                Context.ScheduleLessons.Add(scheduleLessons);
+                Context.SaveChanges();
+                dgScheduleLessons.ItemsSource = GetScheduleLessons;
+
             }
             catch (Exception ex)
             {
@@ -86,12 +81,9 @@ namespace ScheduleGTT
 
                 ScheduleLessons scheduleLessons = dgScheduleLessons.SelectedItem as ScheduleLessons;
 
-                DateTime dateLesson = Convert.ToDateTime(DateTB.Text);
-                bool dateNoEmpty = string.IsNullOrEmpty(dateLesson.ToString());
-
-                if (scheduleLessons != null && dateNoEmpty)
+                if (scheduleLessons != null)
                 {
-                    scheduleLessons.DateLesson = dateLesson;
+                    scheduleLessons.DateLesson = (DateTime)Date.SelectedDate;
                     scheduleLessons.Discipline = disciplines.Id;
                     scheduleLessons.Teacher = teachers.Id;
                     scheduleLessons.LessonType = lessonTypes.Id;
@@ -100,7 +92,6 @@ namespace ScheduleGTT
                     scheduleLessons.Room = rooms.Id;
 
                     Context.SaveChanges();
-                    DateTB.ClearTB();
                     dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
@@ -110,9 +101,31 @@ namespace ScheduleGTT
             }
         }
 
+        private void FilterScheduleLessons_Click(object sender, RoutedEventArgs e)
+        {
+            if (Date.SelectedDate != null && MultiDate.SelectedDate != null)
+            {
+                Groups groups = GroupsCB.SelectedItem as Groups;
+                DateTime begin = (DateTime)Date.SelectedDate;
+                DateTime end = (DateTime)MultiDate.SelectedDate;
+
+                dgScheduleLessons.ItemsSource = GetFilteredScheduleLessons(begin, end, groups.Name);
+            }
+            else
+            {
+                MessageBox.Show("Необходимо указать начальный и конечный день");
+            }
+        }
+
+        private void CancelFilterScheduleLessons_Click(object sender, RoutedEventArgs e)
+        {
+            dgScheduleLessons.ItemsSource = GetScheduleLessons;
+        }
+
         private void ImportScheduleLessons_Click(object sender, RoutedEventArgs e)
         {
             dgScheduleLessons.ExportToExcel();
         }
+
     }
 }

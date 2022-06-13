@@ -26,18 +26,20 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
-            <RowDefinition Height="80"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0"
-                    Grid.RowSpan="2">
+                    Grid.RowSpan="3">
             <TextBlock Text="Дисциплина"/>
             <ComboBox Name="DisciplinesCB"
                       ItemsSource="{Binding Path=GetDisciplines}"
@@ -48,8 +50,6 @@
                       ItemsSource="{Binding Path=GetTeachers}"
                       SelectedIndex="0"
                       DisplayMemberPath="FullName"/>
-            <TextBlock Text="Дата дня"/>
-            <TextBox Name="DateTB"/>
             <TextBlock Text="Группа"/>
             <ComboBox Name="GroupsCB"
                       ItemsSource="{Binding Path=GetGroups}"
@@ -74,22 +74,21 @@
 
         <DataGrid Name="dgScheduleLessons"
                   SelectionMode="Extended"
-                  Grid.Row="0"
+                  Grid.Row="1"
                   Grid.Column="1"
-                  Grid.RowSpan="3"
+                  Grid.RowSpan="2"
+                  Grid.ColumnSpan="2"
                   ItemsSource="{Binding Path=GetScheduleLessons}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Ид"
-                                    Binding="{Binding Path=Id}"/>
                 <DataGridTextColumn Header="Дисциплина"
                                     Binding="{Binding Path=Disciplines.Name}"/>
                 <DataGridTextColumn Header="Преподаватель"
                                     Binding="{Binding Path=Teachers.FullName}"/>
-                <DataGridTextColumn Header="Дата дня"
+                <DataGridTextColumn Header="День"
                                     Binding="{Binding Path=DateLesson, 
                                                       StringFormat=\{0:dd.MM.yyyy\}}"/>
                 <DataGridTextColumn Header="Группа"
-                                    Binding="{Binding Path=Groups.Name}"/>
+                                   Binding="{Binding Path=Groups.Name}"/>
                 <DataGridTextColumn Header="Название звонка"
                                     Binding="{Binding Path=ScheduleBell1.Name}"/>
                 <DataGridTextColumn Header="Помещение"
@@ -98,6 +97,36 @@
                                     Binding="{Binding Path=LessonTypes.Name}"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <DataGrid Name="dgTeacherOnSL"
+                  Grid.Row="2"
+                  Grid.Column="1"
+                  Grid.ColumnSpan="2"
+                  Grid.RowSpan="2"
+                  ItemsSource="{Binding Path=GetTeacherDisciplines}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ФИО"
+                                    Binding="{Binding Path=Teachers.FullName}"/>
+                <DataGridTextColumn Header="Дисциплина"
+                                    Binding="{Binding Path=Disciplines.Name}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="0"
+                    Grid.Column="1">
+            <TextBlock Text="День / Начальный день"/>
+            <Calendar Name="Date"
+                      SelectionMode="SingleDate"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0"
+                    Grid.Column="2">
+            <TextBlock Text="Конечный день"/>
+            <Calendar Name="MultiDate"
+                      SelectionMode="SingleDate"
+                      Grid.Row="0"
+                      Grid.Column="1"/>
+        </StackPanel>
 
         <Menu Grid.Row="3">
             <MenuItem Header="Добавить"
@@ -112,6 +141,12 @@
             <MenuItem Header="Создать отчет Excel"
                       Name="ImportScheduleLessons"
                       Click="ImportScheduleLessons_Click"/>
+            <MenuItem Header="Фильтрация по дням и группе"
+                      Name="FilterScheduleLessons"
+                      Click="FilterScheduleLessons_Click"/>
+            <MenuItem Header="Отмена фильтрации"
+                      Name="CancelFilterScheduleLessons"
+                      Click="CancelFilterScheduleLessons_Click"/>
         </Menu>
     </Grid>
 </Window>

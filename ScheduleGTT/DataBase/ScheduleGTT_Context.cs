@@ -89,6 +89,19 @@ namespace ScheduleGTT.DataBase
         public DbSet<TeacherDisciplines> TeacherDisciplines { get; set; }
         #endregion
 
+        public static List<ScheduleLessons> GetFilteredScheduleLessons(DateTime beginDate, DateTime endDate, string group)
+        {
+            return Context.ScheduleLessons
+                .Include(t => t.Teachers)
+                .Include(g => g.Groups)
+                .Include(les => les.LessonTypes)
+                .Include(r => r.Rooms)
+                .Include(d => d.Disciplines)
+                .Include(sb => sb.ScheduleBell1)
+                .Where(s => s.DateLesson >= beginDate && s.DateLesson <= endDate && s.Groups.Name == group)
+                .ToList();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Disciplines>()

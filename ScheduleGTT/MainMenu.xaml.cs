@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using static ScheduleGTT.DataBase.ScheduleGTT_Context;
 
 namespace ScheduleGTT
@@ -388,6 +389,7 @@ namespace ScheduleGTT
                     dgDisciplines.ItemsSource = GetDisciplines;
                     dgScheduleLessons.ItemsSource = GetScheduleLessons;
                     DisciplinesCB.ItemsSource = GetDisciplines;
+                    dgTeacherOnSL.ItemsSource = GetTeacherDisciplines;
                 }
             }
             catch (Exception ex)
@@ -410,6 +412,7 @@ namespace ScheduleGTT
 
                     dgScheduleLessons.ItemsSource = GetScheduleLessons;
                     DisciplinesCB.ItemsSource = GetDisciplines;
+                    dgTeacherOnSL.ItemsSource = GetTeacherDisciplines;
                 }
             }
             catch (Exception ex)
@@ -436,6 +439,7 @@ namespace ScheduleGTT
                     DisciplineShortNameTB.ClearTB();
                     dgDisciplines.ItemsSource = GetDisciplines;
                     dgScheduleLessons.ItemsSource = GetScheduleLessons;
+                    dgTeacherOnSL.ItemsSource = GetTeacherDisciplines;
                 }
             }
             catch (Exception ex)
@@ -525,6 +529,11 @@ namespace ScheduleGTT
             }
         }
 
+        private void PrintScheduleBell_Click(object sender, RoutedEventArgs e)
+        {
+            dgScheduleBells.ExportToExcel();
+        }
+
         private void AddScheduleLesson_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -536,26 +545,21 @@ namespace ScheduleGTT
                 Rooms rooms = RoomsCB.SelectedItem as Rooms;
                 LessonTypes lessonTypes = TypeLessonsCB.SelectedItem as LessonTypes;
 
-                DateTime dateLesson = Convert.ToDateTime(DateTB.Text);
-
-                if (string.IsNullOrEmpty(dateLesson.ToString()))
+                ScheduleLessons scheduleLessons = new ScheduleLessons
                 {
-                    ScheduleLessons scheduleLessons = new ScheduleLessons
-                    {
-                        DateLesson = dateLesson,
-                        Discipline = disciplines.Id,
-                        Teacher = teachers.Id,
-                        LessonType = lessonTypes.Id,
-                        GroupId = groups.Id,
-                        ScheduleBell = scheduleBell.Id,
-                        Room = rooms.Id
-                    };
+                    DateLesson = (DateTime)Date.SelectedDate,
+                    Discipline = disciplines.Id,
+                    Teacher = teachers.Id,
+                    LessonType = lessonTypes.Id,
+                    GroupId = groups.Id,
+                    ScheduleBell = scheduleBell.Id,
+                    Room = rooms.Id
+                };
 
-                    Context.ScheduleLessons.Add(scheduleLessons);
-                    Context.SaveChanges();
-                    DateTB.ClearTB();
-                    dgScheduleLessons.ItemsSource = GetScheduleLessons;
-                }
+                Context.ScheduleLessons.Add(scheduleLessons);
+                Context.SaveChanges();
+                dgScheduleLessons.ItemsSource = GetScheduleLessons;
+                
             }
             catch (Exception ex)
             {
@@ -568,9 +572,8 @@ namespace ScheduleGTT
             try
             {
                 ScheduleLessons scheduleLessons = dgScheduleLessons.SelectedItem as ScheduleLessons;
-                int selectedRowCount = dgScheduleLessons.Items.Count;
 
-                if (scheduleLessons != null && selectedRowCount == 1)
+                if (scheduleLessons != null)
                 {
                     Context.ScheduleLessons.Remove(scheduleLessons);
                     Context.SaveChanges();
@@ -595,14 +598,10 @@ namespace ScheduleGTT
                 LessonTypes lessonTypes = TypeLessonsCB.SelectedItem as LessonTypes;
 
                 ScheduleLessons scheduleLessons = dgScheduleLessons.SelectedItem as ScheduleLessons;
-                int selectedRowCount = dgScheduleLessons.Items.Count;
 
-                DateTime dateLesson = Convert.ToDateTime(DateTB.Text);
-                bool dateNoEmpty = string.IsNullOrEmpty(dateLesson.ToString());
-
-                if (scheduleLessons != null && selectedRowCount == 1 && dateNoEmpty)
+                if (scheduleLessons != null)
                 {
-                    scheduleLessons.DateLesson = dateLesson;
+                    scheduleLessons.DateLesson = (DateTime)Date.SelectedDate;
                     scheduleLessons.Discipline = disciplines.Id;
                     scheduleLessons.Teacher = teachers.Id;
                     scheduleLessons.LessonType = lessonTypes.Id;
@@ -611,7 +610,6 @@ namespace ScheduleGTT
                     scheduleLessons.Room = rooms.Id;
                     
                     Context.SaveChanges();
-                    DateTB.ClearTB();
                     dgScheduleLessons.ItemsSource = GetScheduleLessons;
                 }
             }
@@ -619,6 +617,27 @@ namespace ScheduleGTT
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void FilterScheduleLessons_Click(object sender, RoutedEventArgs e)
+        {
+            if (Date.SelectedDate != null && MultiDate.SelectedDate != null)
+            {
+                Groups groups = GroupsCB.SelectedItem as Groups;
+                DateTime begin = (DateTime)Date.SelectedDate;
+                DateTime end = (DateTime)MultiDate.SelectedDate;
+
+                dgScheduleLessons.ItemsSource = GetFilteredScheduleLessons(begin, end, groups.Name);
+            }
+            else
+            {
+                MessageBox.Show("Необходимо указать начальный и конечный день");
+            }
+        }
+
+        private void CancelFilterScheduleLessons_Click(object sender, RoutedEventArgs e)
+        {
+            dgScheduleLessons.ItemsSource = GetScheduleLessons;
         }
 
         private void ImportScheduleLessons_Click(object sender, RoutedEventArgs e)
@@ -658,6 +677,7 @@ namespace ScheduleGTT
                     TeacherWithDisciplineCB.ItemsSource = GetTeachers;
                     TeachersCB.ItemsSource = GetTeachers;
                     dgScheduleLessons.ItemsSource = GetScheduleLessons;
+                    dgTeacherOnSL.ItemsSource = GetTeacherDisciplines;
                 }
             }
             catch (Exception ex)
@@ -680,6 +700,7 @@ namespace ScheduleGTT
                     TeacherWithDisciplineCB.ItemsSource = GetTeachers;
                     TeachersCB.ItemsSource = GetTeachers;
                     dgScheduleLessons.ItemsSource = GetScheduleLessons;
+                    dgTeacherOnSL.ItemsSource = GetTeacherDisciplines;
                 }
             }
             catch (Exception ex)
@@ -717,6 +738,7 @@ namespace ScheduleGTT
                     TeacherWithDisciplineCB.ItemsSource = GetTeachers;
                     TeachersCB.ItemsSource = GetTeachers;
                     dgScheduleLessons.ItemsSource = GetScheduleLessons;
+                    dgTeacherOnSL.ItemsSource = GetTeacherDisciplines;
                 }
             }
             catch (Exception ex)
@@ -740,19 +762,20 @@ namespace ScheduleGTT
             Context.SaveChanges();
 
             dgTeacherLessons.ItemsSource = GetTeacherDisciplines;
+            dgTeacherOnSL.ItemsSource = GetTeacherDisciplines;
         }
 
         private void DeleteTeacherDisciplines_Click(object sender, RoutedEventArgs e)
         {
             TeacherDisciplines teacherDisciplines = dgTeacherLessons.SelectedItems as TeacherDisciplines;
-           
-            Teachers teachers = TeacherWithDisciplineCB.SelectedItem as Teachers;
-            Disciplines disciplines = DisciplinesCB.SelectedItem as Disciplines;
 
             if (teacherDisciplines != null)
             {
-                teacherDisciplines.TeacherId = teachers.Id; 
-                teacherDisciplines.DisciplineId = disciplines.Id;   
+                Context.TeacherDisciplines.Remove(teacherDisciplines);
+                Context.SaveChanges();
+
+                dgTeacherLessons.ItemsSource = GetTeacherDisciplines;
+                dgTeacherOnSL.ItemsSource = GetTeacherDisciplines;
             }
         }
     }

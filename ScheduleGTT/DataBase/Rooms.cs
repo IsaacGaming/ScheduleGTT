@@ -21,6 +21,8 @@ namespace ScheduleGTT.DataBase
         [StringLength(200)]
         public string Name { get; set; }
 
+        public string FullNameRoom => $"({NumberRoom.Trim()}) {Name}";
+
         public virtual ICollection<ScheduleLessons> ScheduleLessons { get; set; }
     }
 }

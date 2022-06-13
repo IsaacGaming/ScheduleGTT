@@ -126,6 +126,5 @@ namespace ScheduleGTT
         {
             dgScheduleLessons.ExportToExcel();
         }
-
     }
 }

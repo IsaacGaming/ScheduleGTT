@@ -39,7 +39,7 @@
         <TabControl Grid.Row="1">
             <TabItem Header="Справочники">
                 <TabControl TabStripPlacement="Left">
-                    <TabItem Header="Типы группы">
+                    <TabItem Header="Типы финансирования">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -432,7 +432,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition/>
-                                <RowDefinition/>
+                                <RowDefinition Height="0.5*"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
@@ -468,7 +468,7 @@
                                 <ComboBox Name="RoomsCB"
                                           SelectedIndex="0"
                                           ItemsSource="{Binding Path=GetRooms}"
-                                          DisplayMemberPath="NumberRoom"/>
+                                          DisplayMemberPath="FullNameRoom"/>
                                 <TextBlock Text="Тип занятия"/>
                                 <ComboBox Name="TypeLessonsCB"
                                           SelectedIndex="0"
@@ -480,7 +480,6 @@
                                       SelectionMode="Extended"
                                       Grid.Row="1"
                                       Grid.Column="1"
-                                      Grid.RowSpan="2"
                                       Grid.ColumnSpan="2"
                                       ItemsSource="{Binding Path=GetScheduleLessons}">
                                 <DataGrid.Columns>
@@ -496,7 +495,7 @@
                                     <DataGridTextColumn Header="Название звонка"
                                                         Binding="{Binding Path=ScheduleBell1.Name}"/>
                                     <DataGridTextColumn Header="Помещение"
-                                                        Binding="{Binding Path=Rooms.NumberRoom}"/>
+                                                        Binding="{Binding Path=Rooms.FullNameRoom}"/>
                                     <DataGridTextColumn Header="Тип занятия"
                                                         Binding="{Binding Path=LessonTypes.Name}"/>
                                 </DataGrid.Columns>

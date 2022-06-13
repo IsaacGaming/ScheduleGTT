@@ -9,7 +9,7 @@ namespace ScheduleGTT.DataBase
     public partial class ScheduleGTT_Context : DbContext
     {
         public ScheduleGTT_Context()
-            : base("name=ScheduleGTT_Context")
+            : base("name=ScheduleGTT_Context_Ñollege")
         {
         }
 

@@ -9,7 +9,7 @@ namespace ScheduleGTT.DataBase
     public partial class ScheduleGTT_Context : DbContext
     {
         public ScheduleGTT_Context()
-            : base("name=ScheduleGTT_Context_Ñollege")
+            : base("name=ScheduleGTT_Context")
         {
         }
 
@@ -87,6 +87,8 @@ namespace ScheduleGTT.DataBase
         public DbSet<Specialities> Specialities { get; set; }
         public DbSet<Teachers> Teachers { get; set; }
         public DbSet<TeacherDisciplines> TeacherDisciplines { get; set; }
+        public DbSet<UserRoles> UserRoles { get; set; }
+        public DbSet<Users> Users { get; set; }
         #endregion
 
         public static List<ScheduleLessons> GetFilteredScheduleLessons(DateTime beginDate, DateTime endDate, string group)
@@ -104,6 +106,11 @@ namespace ScheduleGTT.DataBase
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UserRoles>()
+                .HasMany(ur => ur.Users)
+                .WithOptional(ur => ur.UserRoles)
+                .HasForeignKey(u => u.UserRole);
+            
             modelBuilder.Entity<Disciplines>()
                 .HasMany(e => e.ScheduleLessons)
                 .WithOptional(e => e.Disciplines)

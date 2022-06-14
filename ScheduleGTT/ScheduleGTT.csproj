@@ -86,6 +86,8 @@
     <Compile Include="DataBase\Specialities.cs" />
     <Compile Include="DataBase\TeacherDisciplines.cs" />
     <Compile Include="DataBase\Teachers.cs" />
+    <Compile Include="DataBase\UserRoles.cs" />
+    <Compile Include="DataBase\Users.cs" />
     <Compile Include="WndManager.cs" />
   </ItemGroup>
   <ItemGroup>

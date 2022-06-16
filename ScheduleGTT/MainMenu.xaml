@@ -66,12 +66,12 @@
 
                             <DataGrid Name="dgGroupType"
                                       Grid.Row="2"
-                                      ItemsSource="{Binding Path=GetGroupTypes}">
+                                      ItemsSource="{Binding Path=GetGroupTypes, Mode=OneWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
-                                                        Binding="{Binding Path=Id}"/>
+                                                        Binding="{Binding Path=Id, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Название"
-                                                        Binding="{Binding Path=Name}"/>
+                                                        Binding="{Binding Path=Name, Mode=OneWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -104,12 +104,12 @@
 
                             <DataGrid Name="dgLessonsType"
                                       Grid.Row="2"
-                                      ItemsSource="{Binding Path=GetLessonTypes}">
+                                      ItemsSource="{Binding Path=GetLessonTypes, Mode=OneWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
-                                                        Binding="{Binding Path=Id}"/>
+                                                        Binding="{Binding Path=Id, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Название"
-                                                        Binding="{Binding Path=Name}"/>
+                                                        Binding="{Binding Path=Name, Mode=OneWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -142,12 +142,12 @@
 
                             <DataGrid Name="dgSpecialities"
                                       Grid.Row="2"       
-                                      ItemsSource="{Binding Path=GetSpecialities}">
+                                      ItemsSource="{Binding Path=GetSpecialities, Mode=OneWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
-                                                        Binding="{Binding Path=Id}"/>
+                                                        Binding="{Binding Path=Id, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Название"
-                                                        Binding="{Binding Path=Name}"/>
+                                                        Binding="{Binding Path=Name, Mode=OneWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -178,28 +178,28 @@
                                 <TextBox Name="GroupNameTB"/>
                                 <TextBlock Text="Специальность"/>
                                 <ComboBox Name="SpecialityCB"
-                                          ItemsSource="{Binding Path=GetSpecialities}"
+                                          ItemsSource="{Binding Path=GetSpecialities, Mode=OneWay}"
                                           SelectedIndex="0"
                                           DisplayMemberPath="Name"/>
                                 <TextBlock Text="Тип группы"/>
                                 <ComboBox Name="GroupTypeCB"
-                                          ItemsSource="{Binding Path=GetGroupTypes}"
+                                          ItemsSource="{Binding Path=GetGroupTypes, Mode=OneWay}"
                                           SelectedIndex="0"
                                           DisplayMemberPath="Name"/>
                             </StackPanel>
 
                             <DataGrid Name="dgGroups"
                                       Grid.Row="2"
-                                      ItemsSource="{Binding Path=GetGroups}">
+                                      ItemsSource="{Binding Path=GetGroups, Mode=OneWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
-                                                        Binding="{Binding Path=Id}"/>
+                                                        Binding="{Binding Path=Id, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Название"
-                                                        Binding="{Binding Path=Name}"/>
+                                                        Binding="{Binding Path=Name, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Специальность"
-                                                        Binding="{Binding Path=Specialities.Name}"/>
+                                                        Binding="{Binding Path=Specialities.Name, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Тип группы"
-                                                        Binding="{Binding Path=GroupTypes.Name}"/>
+                                                        Binding="{Binding Path=GroupTypes.Name, Mode=OneWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -234,14 +234,14 @@
 
                             <DataGrid Name="dgRooms"
                                       Grid.Row="2"
-                                      ItemsSource="{Binding Path=GetRooms}">
+                                      ItemsSource="{Binding Path=GetRooms, Mode=OneWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
-                                                        Binding="{Binding Path=Id}"/>
+                                                        Binding="{Binding Path=Id, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Номер"
-                                                        Binding="{Binding Path=NumberRoom}"/>
+                                                        Binding="{Binding Path=NumberRoom, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Название"
-                                                        Binding="{Binding Path=Name}"/>
+                                                        Binding="{Binding Path=Name, Mode=OneWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -276,14 +276,14 @@
 
                             <DataGrid Name="dgDisciplines"
                                       Grid.Row="2"
-                                      ItemsSource="{Binding Path=GetDisciplines}">
+                                      ItemsSource="{Binding Path=GetDisciplines, Mode=OneWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
-                                                        Binding="{Binding Path=Id}"/>
+                                                        Binding="{Binding Path=Id, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Название"
-                                                        Binding="{Binding Path=Name}"/>
+                                                        Binding="{Binding Path=Name, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Краткое название"
-                                                        Binding="{Binding Path=ShortName}"/>
+                                                        Binding="{Binding Path=ShortName, Mode=OneWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -311,12 +311,12 @@
                                 <TextBox Name="LastNameTeacherTB"/>
                                 <TextBlock Text="Преподаваемые дисциплины"/>
                                 <ComboBox Name="TeacherDisciplinesCB"
-                                          ItemsSource="{Binding Path=GetDisciplines}"
+                                          ItemsSource="{Binding Path=GetDisciplines, Mode=OneWay}"
                                           DisplayMemberPath="Name"
                                           SelectedIndex="1"/>
                                 <TextBlock Text="Преподаватель"/>
                                 <ComboBox Name="TeacherWithDisciplineCB"
-                                          ItemsSource="{Binding Path=GetTeachers}"
+                                          ItemsSource="{Binding Path=GetTeachers, Mode=OneWay}"
                                           DisplayMemberPath="FullName"
                                           SelectedIndex="1"/>
                             </StackPanel>
@@ -324,14 +324,14 @@
                             <DataGrid Name="dgTeachers"
                                       Grid.Row="0"
                                       Grid.Column="1"
-                                      ItemsSource="{Binding Path=GetTeachers}">
+                                      ItemsSource="{Binding Path=GetTeachers, Mode=OneWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Ид"
                                                         Width="80"
-                                                        Binding="{Binding Path=Id}"/>
+                                                        Binding="{Binding Path=Id, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="ФИО"
                                                         Width="auto"
-                                                        Binding="{Binding Path=FullName}"/>
+                                                        Binding="{Binding Path=FullName, Mode=OneWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
@@ -339,12 +339,12 @@
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       Grid.RowSpan="2"
-                                      ItemsSource="{Binding Path=GetTeacherDisciplines}">
+                                      ItemsSource="{Binding Path=GetTeacherDisciplines, Mode=OneWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="ФИО"
-                                                        Binding="{Binding Path=Teachers.FullName}"/>
+                                                        Binding="{Binding Path=Teachers.FullName, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Дисциплина"
-                                                        Binding="{Binding Path=Disciplines.Name}"/>
+                                                        Binding="{Binding Path=Disciplines.Name, Mode=OneWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
@@ -413,15 +413,15 @@
                                       Grid.Row="0"
                                       Grid.Column="2"
                                       Grid.RowSpan="3"
-                                      ItemsSource="{Binding GetScheduleBells}">
+                                      ItemsSource="{Binding GetScheduleBells, Mode=OneWay}">
                                 <DataGrid.Columns>
 
                                     <DataGridTextColumn Header="Название урока"
-                                                        Binding="{Binding Path=Name}"/>
+                                                        Binding="{Binding Path=Name, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Начало урока"
-                                                        Binding="{Binding Path=BeginBell, StringFormat=\{0:HH:mm\}}"/>
+                                                        Binding="{Binding Path=BeginBell, Mode=OneWay, StringFormat=\{0:HH:mm\}}"/>
                                     <DataGridTextColumn Header="Конец урока"
-                                                        Binding="{Binding Path=EndBell, StringFormat=\{0:HH:mm\}}"/>
+                                                        Binding="{Binding Path=EndBell, Mode=OneWay,  StringFormat=\{0:HH:mm\}}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -446,33 +446,33 @@
                                         Grid.RowSpan="3">
                                 <TextBlock Text="Дисциплина"/>
                                 <ComboBox Name="DisciplinesCB"
-                                          ItemsSource="{Binding Path=GetDisciplines}"
+                                          ItemsSource="{Binding Path=GetDisciplines, Mode=OneWay}"
                                           SelectedIndex="0"
                                           DisplayMemberPath="Name"/>
                                 <TextBlock Text="Преподаватель"/>
                                 <ComboBox Name="TeachersCB"
-                                          ItemsSource="{Binding Path=GetTeachers}"
+                                          ItemsSource="{Binding Path=GetTeachers, Mode=OneWay}"
                                           SelectedIndex="0"
                                           DisplayMemberPath="FullName"/>
                                 <TextBlock Text="Группа"/>
                                 <ComboBox Name="GroupsCB"
-                                          ItemsSource="{Binding Path=GetGroups}"
+                                          ItemsSource="{Binding Path=GetGroups, Mode=OneWay}"
                                           SelectedIndex="0"
                                           DisplayMemberPath="Name"/>
                                 <TextBlock Text="Название звонка"/>
                                 <ComboBox Name="NameBellCB"
-                                          ItemsSource="{Binding Path=GetScheduleBells}"
+                                          ItemsSource="{Binding Path=GetScheduleBells, Mode=OneWay}"
                                           SelectedIndex="0"
                                           DisplayMemberPath="Name"/>
                                 <TextBlock Text="Помещение"/>
                                 <ComboBox Name="RoomsCB"
                                           SelectedIndex="0"
-                                          ItemsSource="{Binding Path=GetRooms}"
+                                          ItemsSource="{Binding Path=GetRooms, Mode=OneWay}"
                                           DisplayMemberPath="FullNameRoom"/>
                                 <TextBlock Text="Тип занятия"/>
                                 <ComboBox Name="TypeLessonsCB"
                                           SelectedIndex="0"
-                                          ItemsSource="{Binding Path=GetLessonTypes}"
+                                          ItemsSource="{Binding Path=GetLessonTypes, Mode=OneWay}"
                                           DisplayMemberPath="Name"/>
                             </StackPanel>
 
@@ -481,23 +481,24 @@
                                       Grid.Row="1"
                                       Grid.Column="1"
                                       Grid.ColumnSpan="2"
-                                      ItemsSource="{Binding Path=GetScheduleLessons}">
+                                      ItemsSource="{Binding Path=GetScheduleLessons, Mode=OneWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Дисциплина"
-                                                        Binding="{Binding Path=Disciplines.Name}"/>
+                                                        Binding="{Binding Path=Disciplines.Name, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Преподаватель"
-                                                        Binding="{Binding Path=Teachers.FullName}"/>
+                                                        Binding="{Binding Path=Teachers.FullName, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="День"
                                                         Binding="{Binding Path=DateLesson, 
+                                                                          Mode=OneWay,
                                                                           StringFormat=\{0:dd.MM.yyyy\}}"/>
                                     <DataGridTextColumn Header="Группа"
-                                                        Binding="{Binding Path=Groups.Name}"/>
+                                                        Binding="{Binding Path=Groups.Name, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Название звонка"
-                                                        Binding="{Binding Path=ScheduleBell1.Name}"/>
+                                                        Binding="{Binding Path=ScheduleBell1.Name, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Помещение"
-                                                        Binding="{Binding Path=Rooms.FullNameRoom}"/>
+                                                        Binding="{Binding Path=Rooms.FullNameRoom, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Тип занятия"
-                                                        Binding="{Binding Path=LessonTypes.Name}"/>
+                                                        Binding="{Binding Path=LessonTypes.Name, Mode=OneWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
@@ -506,12 +507,12 @@
                                       Grid.Column="1"
                                       Grid.ColumnSpan="2"
                                       Grid.RowSpan="2"
-                                      ItemsSource="{Binding Path=GetTeacherDisciplines}">
+                                      ItemsSource="{Binding Path=GetTeacherDisciplines, Mode=OneWay}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="ФИО"
-                                                        Binding="{Binding Path=Teachers.FullName}"/>
+                                                        Binding="{Binding Path=Teachers.FullName, Mode=OneWay}"/>
                                     <DataGridTextColumn Header="Дисциплина"
-                                                        Binding="{Binding Path=Disciplines.Name}"/>
+                                                        Binding="{Binding Path=Disciplines.Name, Mode=OneWay}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
 
